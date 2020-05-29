@@ -66,7 +66,6 @@
 * Macros
 ********************************************************************************/
 #define TCP_KEEPALIVE_OFFLOAD             "TKO"
-#define MAX_TCP_PORTNUM                   (65535)
 
 /*******************************************************************************
 * Global Variables
@@ -205,8 +204,9 @@ cy_rslt_t tcp_socket_connection_start(void)
         for (index = 0; index < MAX_TKO; index++)
         {
              port = &downloaded->ports[index];
-             if (((port->remote_port > 0) && (port->remote_port <= MAX_TCP_PORTNUM)) &&
-                 ((port->local_port > 0) && (port->local_port <= MAX_TCP_PORTNUM)) &&
+
+             if ((port->remote_port > 0) &&
+                 (port->local_port > 0) &&
                  (strcmp(port->remote_ip, NULL_IP_ADDRESS) != 0))
              {
                  /*
