@@ -133,7 +133,7 @@ const ol_desc_t *find_my_tko_descriptor(const char *name)
  *******************************************************************************/
 void network_idle_task(void *arg)
 {
-    struct netif* wifi = cy_lwip_get_interface();
+    struct netif* wifi = cy_lwip_get_interface(CY_LWIP_STA_NW_INTERFACE);
 
     while( true )
     {
@@ -175,7 +175,7 @@ cy_rslt_t tcp_socket_connection_start(void)
     cy_rslt_t result = CY_RSLT_SUCCESS;
     const cy_tko_ol_connect_t *port;
     int index = 0;
-    struct netif *netif = cy_lwip_get_interface();
+    struct netif *netif = cy_lwip_get_interface(CY_LWIP_STA_NW_INTERFACE);
     cy_rslt_t socket_connection_status = CY_RSLT_SUCCESS;
 
     result = cy_socket_init();

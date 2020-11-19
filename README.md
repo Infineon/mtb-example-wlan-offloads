@@ -1,25 +1,36 @@
 # AnyCloud Example: WLAN TCP Keepalive Offload
 
-This code example demonstrates the TCP keepalive Offload functionality offered by Cypress Wi-Fi devices using PSoC® 6 MCU. It employs the [Low Power Assistant](https://github.com/cypresssemiconductorco/lpa) (LPA) middleware library, which helps in developing low-power applications for Cypress devices.
+This code example demonstrates the TCP Keepalive Offload functionality offered by Cypress Wi-Fi devices using PSoC® 6 MCU. It employs the [Low Power Assistant](https://github.com/cypresssemiconductorco/lpa) (LPA) middleware library, which helps in developing low-power applications for Cypress devices.
 
 The TCP keepalive offload functionality allows the WLAN device to handle the TCP keepalive packets from the network on its own so that the PSoC 6 MCU can remain in a low-power mode longer.
 
 ## Requirements
 
-- [ModusToolbox™ software](https://www.cypress.com/products/modustoolbox-software-environment) v2.1
+- [ModusToolbox® software](https://www.cypress.com/products/modustoolbox-software-environment) v2.2  
+
+    **Note:** This code example version requires ModusToolbox software version 2.2 or later and is not backward compatible with v2.1 or older versions. If you cannot move to ModusToolbox v2.2, use [latest-v1.X](https://github.com/cypresssemiconductorco/mtb-example-anycloud-offload-tcp-keepalive/tree/latest-v1.X) that is compatible with ModusToolbox v2.1.
+- Board Support Package (BSP) minimum required version: 2.0.0
 - Programming Language: C
-- Associated Parts: All [PSoC 6 MCU](http://www.cypress.com/PSoC6) parts
+- Associated Parts: All [PSoC® 6 MCU](http://www.cypress.com/PSoC6) parts
 
-## Supported Kits
+## Supported Toolchains (make variable 'TOOLCHAIN')
 
-- [PSoC 6 Wi-Fi BT Prototyping Kit](https://www.cypress.com/CY8CPROTO-062-4343W) (CY8CPROTO-062-4343W) - Default target
+- GNU Arm® Embedded Compiler v9.3.1 (GCC_ARM) - Default value of `TOOLCHAIN`
+- IAR C/C++ compiler v8.32.2 (IAR)
+
+## Supported Kits (make variable 'TARGET')
+
+- [PSoC 6 Wi-Fi BT Prototyping Kit](https://www.cypress.com/CY8CPROTO-062-4343W) (CY8CPROTO-062-4343W) - Default value of `TARGET`
+- [PSoC 6 WiFi-BT Pioneer Kit](https://www.cypress.com/CY8CKIT-062-WiFi-BT) (CY8CKIT-062-WIFI-BT)
 - [PSoC 62S2 Wi-Fi BT Pioneer Kit](https://www.cypress.com/CY8CKIT-062S2-43012) (CY8CKIT-062S2-43012)
+- [PSoC 62S1 Wi-Fi BT Pioneer Kit](https://www.cypress.com/CYW9P62S1-43438EVB-01) (CYW9P62S1-43438EVB-01)
+- [PSoC 62S1 Wi-Fi BT Pioneer Kit](https://www.cypress.com/CYW9P62S1-43012EVB-01) (CYW9P62S1-43012EVB-01)
 
 ## Hardware Setup
 
 This example uses the board's default configuration. See the kit user guide to ensure that the board is configured correctly.
 
-**Note**: The PSoC 6 BLE Pioneer Kit (CY8CKIT-062-BLE) and the PSoC 6 WiFi-BT Pioneer Kit (CY8CKIT-062-WIFI-BT) ship with KitProg2 installed. ModusToolbox software requires KitProg3. Before using this code example, make sure that the board is upgraded to KitProg3. The tool and instructions are available in the [Firmware Loader](https://github.com/cypresssemiconductorco/Firmware-loader) GitHub repository. If you do not upgrade, you will see an error like "unable to find CMSIS-DAP device" or "KitProg firmware is out of date".
+**Note:** The PSoC 6 WiFi-BT Pioneer Kit (CY8CKIT-062-WIFI-BT) ships with KitProg2 installed. The ModusToolbox software requires KitProg3. Before using this code example, make sure that the board is upgraded to KitProg3. The tool and instructions are available in the [Firmware Loader](https://github.com/cypresssemiconductorco/Firmware-loader) GitHub repository. If you do not upgrade, you will see an error like "unable to find CMSIS-DAP device" or "KitProg firmware is out of date".
 
 ## Software Setup
 
@@ -31,43 +42,55 @@ This example uses the board's default configuration. See the kit user guide to e
 
 ### In Eclipse IDE for ModusToolbox:
 
-1. Click the **New Application** link in the Quick Panel (or, use **File** > **New** > **ModusToolbox Application**).
+1. Click the **New Application** link in the **Quick Panel** (or, use **File** > **New** > **ModusToolbox Application**). This launches the [Project Creator](http://www.cypress.com/ModusToolboxProjectCreator) tool.
 
 2. Pick a kit supported by the code example from the list shown in the **Project Creator - Choose Board Support Package (BSP)** dialog.
 
-   When you select a supported kit, the example is reconfigured automatically to work with the kit. To work with a different supported kit later, use the **Library Manager** to choose the BSP for the supported kit. You can use the Library Manager to select or update the BSP and firmware libraries used in this application. To access the Library Manager, right-click the application name from the Project Workspace window in the IDE, and select **ModusToolbox** > **Library Manager**. You can also access it from the **Quick Panel**.
+   When you select a supported kit, the example is reconfigured automatically to work with the kit. To work with a different supported kit later, use the [Library Manager](https://www.cypress.com/ModusToolboxLibraryManager) to choose the BSP for the supported kit. You can use the Library Manager to select or update the BSP and firmware libraries used in this application. To access the Library Manager, click the link from the Quick Panel. 
 
    You can also just start the application creation process again and select a different kit.
 
    If you want to use the application for a kit not listed here, you may need to update the source files. If the kit does not have the required resources, the application may not work.
 
-3. In the **Project Creator - Select Application** dialog, choose the example.
+3. In the **Project Creator - Select Application** dialog, choose the example by enabling the checkbox.
 
-4. Optionally, update the **Application Name:** and **Location** fields with the application name and local path where the application is created.
+4. Optionally, change the suggested **New Application Name**.
 
-5. Click **Create** to complete the application creation process.
+5. Enter the local path in the **Application(s) Root Path** field to indicate where the application needs to be created. 
 
-For more details, see the Eclipse IDE for ModusToolbox User Guide: *{ModusToolbox install directory}/ide_{version}/docs/mt_ide_user_guide.pdf*.
+   Applications that can share libraries can be placed in the same root path.
+
+6. Click **Create** to complete the application creation process.
+
+For more details, see the [Eclipse IDE for ModusToolbox User Guide](https://www.cypress.com/MTBEclipseIDEUserGuide) (locally available at *{ModusToolbox install directory}/ide_{version}/docs/mt_ide_user_guide.pdf*).
 
 ### In Command-line Interface (CLI):
+
+ModusToolbox provides the Project Creator as both a GUI tool and a command line tool to easily create one or more ModusToolbox applications. See the "Project Creator Tools" section of the [ModusToolbox User Guide](https://www.cypress.com/ModusToolboxUserGuide) for more details.
+
+Alternatively, you can manually create the application using the following steps.
 
 1. Download and unzip this repository onto your local machine, or clone the repository.
 
 2. Open a CLI terminal and navigate to the application folder.
 
-On Linux and macOS, you can use any terminal application. On Windows, navigate to the modus-shell directory (*{ModusToolbox install directory}/tools_\<version>/modus-shell*) and run *Cygwin.bat*.
+   On Linux and macOS, you can use any terminal application. On Windows, open the **modus-shell** app from the Start menu.
+
+   **Note:** The cloned application contains a default BSP file (*TARGET_xxx.mtb*) in the *deps* folder. Use the [Library Manager](https://www.cypress.com/ModusToolboxLibraryManager) (`make modlibs` command) to select and download a different BSP file, if required. If the selected kit does not have the required resources or is not [supported](#supported-kits-make-variable-target), the application may not work. 
 
 3. Import the required libraries by executing the `make getlibs` command.
 
+Various CLI tools include a `-h` option that prints help information to the terminal screen about that tool. For more details, see the [ModusToolbox User Guide](https://www.cypress.com/ModusToolboxUserGuide) (locally available at *{ModusToolbox install directory}/docs_{version}/mtb_user_guide.pdf*).
+
 ### In Third-party IDEs:
 
-1. Follow the instructions from the CLI section to download or clone the repository, and import the libraries using the `make getlibs` command.
+1. Follow the instructions from the [CLI](#in-command-line-interface-cli) section to create the application, and import the libraries using the `make getlibs` command.
 
-2. Export the application to a supported IDE using the `make <ide>` command.
+2. Export the application to a supported IDE using the `make <ide>` command. 
+
+    For a list of supported IDEs and more details, see the "Exporting to IDEs" section of the [ModusToolbox User Guide](https://www.cypress.com/ModusToolboxUserGuide) (locally available at *{ModusToolbox install directory}/docs_{version}/mtb_user_guide.pdf*.
 
 3. Follow the instructions displayed in the terminal to create or import the application as an IDE project.
-
-For more details, see the "Exporting to IDEs" section of the ModusToolbox User Guide: *{ModusToolbox install directory}/ide_{version}/docs/mtb_user_guide.pdf*.
 
 ## Operation
 
@@ -96,13 +119,13 @@ For more details, see the "Exporting to IDEs" section of the ModusToolbox User G
 
 6. Program the board.
 
-   - **Using Eclipse IDE for ModusToolbox**:
+   - **Using Eclipse IDE for ModusToolbox:**
 
       1. Select the application project in the Project Explorer.
 
-      2. In the **Quick Panel**, scroll down, and click **\<Application Name> Program (KitProg3)**.
+      2. In the **Quick Panel**, scroll down, and click **\<Application Name> Program (KitProg3_MiniProg4)**.
 
-   - **Using CLI**:
+   - **Using CLI:**
 
      From the terminal, execute the `make program` command to build and program the application using the default toolchain to the default target. You can specify a target and toolchain manually:
         ```
@@ -122,27 +145,25 @@ For more details, see the "Exporting to IDEs" section of the ModusToolbox User G
     Info: ============================================
     Info: AnyCloud Example: WLAN TCP Keepalive Offload
     Info: ============================================
- 
-    WLAN MAC Address : 44:91:60:9A:35:5A
-    WLAN Firmware    : wl0: Jan 27 2020 21:57:29 version 13.10.271.236 (5a526db) FWID 01-61e2b002
-    WLAN CLM         : API: 18.2 Data: 9.10.0 Compiler: 1.36.1 ClmImport: 1.34.1 Creation: 2020-01-27 21:54:33
-    WHD VERSION      : v1.90.2 : v1.90.2 : GCC 7.2 : 2020-04-13 02:49:57 -0500
+    
+    WLAN MAC Address : A0:C9:A0:3D:D3:6A
+    WLAN Firmware    : wl0: Jan 30 2020 21:41:53 version 7.45.98.95 (r724303 CY) FWID 01-5afc8c1e
+    WLAN CLM         : API: 12.2 Data: 9.10.39 Compiler: 1.29.4 ClmImport: 1.36.3 Creation: 2020-01-30 21:30:05
+    WHD VERSION      : v1.92.0 : v1.92.0 : GCC 9.3 : 2020-09-25 03:12:36 -0500
     Info: Wi-Fi initialization is successful
-    Info: Join to AP: <WIFI_SSID>
-    Info: Successfully joined wifi network <WIFI_SSID>
-    Info: Assigned IP address: <IP_ADDRESS>
+    Info: Join to AP: WIFI_SSID
+    Info: Successfully joined wifi network WIFI_SSID
+    Info: Assigned IP address: 192.168.43.131
     Info: Taking TCP Keepalive configuration from the Generated sources.
-    TCP remote IP Address 6900a8c0  remote port:3360
-    TCP Connection Established Successfully ctx:8010fd8
-    Info: Socket[0]: Created connection to IP 192.168.0.105, local port 3353, remote port 3360
+    Info: Socket[0]: Created connection to IP 192.168.43.218, local port 3353, remote port 3360
     Info: Skipped TCP socket connection for socket id[1]. Check the TCP Keepalive configuration.
     Info: Skipped TCP socket connection for socket id[2]. Check the TCP Keepalive configuration.
     Info: Skipped TCP socket connection for socket id[3]. Check the TCP Keepalive configuration.
     whd_tko_toggle: Successfully enabled
- 
+    
     Network Stack Suspended, MCU will enter DeepSleep power mode
     ```
-8. Use the tcpdump utility to capture the over-the-air TCP keepalive packets between the client (target kit) and the server (the PC). See [Software Setup](#software-setup) to download this tool for Windows. On Ubuntu and macOS, this utility is natively available.
+8. Use the TCPDUMP utility to capture the over-the-air TCP keepalive packets between the client (target kit) and the server (the PC). See [Software Setup](#software-setup) to download this tool for Windows. On Ubuntu and macOS, this utility is natively available.
 
    - **Ubuntu OS:**
      ```
@@ -163,11 +184,11 @@ For more details, see the "Exporting to IDEs" section of the ModusToolbox User G
       15:18:59.673150 IP 192.168.43.38.3360 > 192.168.43.131.3353: Flags [.], ack 1, win 29200, length 0
       15:19:04.715285 IP 192.168.43.131.3353 > 192.168.43.38.3360: Flags [.], ack 1, win 9205, length 0
      ```
-     **Note:** TCP keepalive packets can be identified by the packet length and TCP flags. The capture logs show that the length of the packet is zero; In addition, the TCP flag `[.]` indicates that it is an ACK packet. This verifies that the TCP keepalive packets are sent and the corresponding ACKs are received from the target kit. This verifies the TCP keepalive Offload functionality.
+     **Note:** TCP keepalive packets can be identified by the packet length and TCP flags. The capture logs show that the length of the packet is zero; in addition, the TCP flag `[.]` indicates that it is an ACK packet. This verifies that the TCP keepalive packets are sent and the corresponding ACKs are received from the target kit. This verifies the TCP keepalive offload functionality.
 
    - **Windows:**
 
-      1. Open the command prompt with administrator privileges and go to the location where tcpdump was installed.
+      1. Open the command prompt with administrator privileges and go to the location where TCPDUMP was installed.
       
       2. Find the Wi-Fi interface number on which over-the-air packets will be captured using the following command. The Wi-Fi interface number is the sequence number that is at the beginning of each line.
       
@@ -187,16 +208,16 @@ For more details, see the "Exporting to IDEs" section of the ModusToolbox User G
          C:\>tcpdump -i <Wi-Fi interface number> -n <expression>
          ```
 
-         Command to filter TCP Keepalive packets:
+         Command to filter TCP keepalive packets:
 
          ```
          C:\>tcpdump -i 5 -n "tcp[tcpflags] == tcp-syn or tcp[tcpflags] == tcp-ack" and port 3360
          ```
          The packet capture logs will look similar to those shown for Ubuntu OS.
 
-   - **MacOS:**
+   - **macOS:**
 
-      Find the Wi-Fi interface for packet capture and then use the tcpdump utility to capture the packets. The tcpdump utility is a built-in packet trace tool available in MacOS. The following command lists all the interfaces and the interface number is identified on `Device:` row (eg. en0) in the command output.
+      Find the Wi-Fi interface for packet capture and then use the tcpdump utility to capture the packets. The TCPDUMP utility is a built-in packet trace tool available in macOS. The following command lists all the interfaces and the interface number is identified on the `Device:` row (e.g., *en0*) in the command output.
 
       ```
       $ networksetup -listallhardwareports
@@ -216,16 +237,17 @@ For more details, see the "Exporting to IDEs" section of the ModusToolbox User G
       $ sudo tcpdump -i <Wi-Fi interface number> -n <expression>
       ```
 
-      Command to filter TCP Keepalive packets:
+      Command to filter TCP keepalive packets:
 
       ```
       $ sudo tcpdump -i en1 -n "tcp[tcpflags] == tcp-syn or tcp[tcpflags] == tcp-ack" and port 3360
       ```
       The packet capture logs will look similar to those shown for Ubuntu OS.
 
-You can also use the Wireshark sniffer tool for capturing TCP keepalive packets on Windows, Ubuntu, and MacOS.
+You can also use the Wireshark sniffer tool for capturing TCP keepalive packets on Windows, Ubuntu, and macOS.
 
 **Figure 1. TCP Keepalive Capture on Wireshark**
+
 ![](images/wireshark_tko.png)
 
 PSoC 6 MCU will wake up only when required by the WLAN device in the following conditions:
@@ -236,7 +258,9 @@ It is recommended to test this application in a less congested network to avoid 
 
 ## Debugging
 
-You can debug the example to step through the code. In the IDE, use the **\<Application Name> Debug (KitProg3)** configuration in the **Quick Panel**. For more details, see the "Program and Debug" section in the Eclipse IDE for ModusToolbox User Guide: *{ModusToolbox install directory}/ide_{version}/docs/mt_ide_user_guide.pdf*.
+You can debug the example to step through the code. In the IDE, use the **\<Application Name> Debug (KitProg3_MiniProg4)** configuration in the **Quick Panel**. For more details, see the "Program and Debug" section in the [Eclipse IDE for ModusToolbox User Guide](https://www.cypress.com/MTBEclipseIDEUserGuide).
+
+**Note:** **(Only while debugging)** On the CM4 CPU, some code in `main()` may execute before the debugger halts at the beginning of `main()`. This means that some code executes twice - once before the debugger stops execution, and again after the debugger resets the program counter to the beginning of `main()`. See [KBA231071](https://community.cypress.com/docs/DOC-21143) to learn about this and for the workaround.
 
 ## Design and Implementation
 
@@ -247,7 +271,7 @@ Cypress [Low Power Assistant](https://github.com/cypresssemiconductorco/lpa) (LP
 - Wi-Fi Packet Filter Offload
 - Wi-Fi TCP keepalive Offload
 
-This document focuses on Wi-Fi TCP keepalive Offload. This feature offloads the TCP keepalive functionality to the WLAN device, allowing the host MCU to enter sleep and deep sleep states, thus reducing the overall system power consumption.
+This document focuses on Wi-Fi TCP keepalive offload. This feature offloads the TCP keepalive functionality to the WLAN device, allowing the host MCU to enter sleep and deep sleep states, thus reducing the overall system power consumption.
 
 The WLAN firmware takes care of sending and receiving TCP keepalive packets with the TCP server (a different machine or a PC running TCP server that listens for incoming TCP connection).
 
@@ -269,6 +293,7 @@ This section describes how to enable TCP keepalive offload and configure four di
 Figure 2 shows that the host wakes up for incoming TCP traffic when offload is not enabled. On the other hand, the host can save more power by entering and staying in deep sleep for a longer time when the TCP keepalive activity is offloaded to the WLAN device.
 
 **Figure 2. TCP Keepalive Offload Disabled vs. Enabled**
+
 ![](images/tko_enabled_vs_disabled.png)
 
 
@@ -288,9 +313,11 @@ The application does the following when the kit is powered up:
 
 Use the Device Configurator tool to configure TCP keepalive and the host MCU WAKE pin.
 
-Cypress packages a default *design.modus* file for each [supported kit](#supported-kits). This does not enable any low-power feature such as ARP offload, packet filter, or TCP keepalive offload. However, this can be a good reference to start the configuration from scratch as needed by the application.
+Cypress packages a default *design.modus* file for each [supported kit](#supported-kits-make-variable-target). This does not enable any low-power feature such as ARP offload, packet filter, or TCP keepalive offload. However, this can be a good reference to start the configuration from scratch as needed by the application.
 
-For this TCP keepalive Offload application demonstration, a pre-configured *design.modus* file that overrides the default kit configuration is provided for each supported kit. These files are located in the project folder under *COMPONENT_CUSTOM_DESIGN_MODUS/TARGET_\<kit>*.
+For this TCP keepalive offload application demonstration, a pre-configured *design.modus* file that overrides the default kit configuration is provided for each supported kit. These files are located in the project folder under *COMPONENT_CUSTOM_DESIGN_MODUS/TARGET_\<kit>*.
+
+**Note:** This section provides instructions only for the targets CY8CPROTO-062-4343W and CY8CKIT-062S2-43012. For other targets, you can follow the same instructions to create custom configuration. Refer to the *../mtb_shared/TARGET_\<kit>/latest-v2.X/COMPONENT_BSP_DESIGN_MODUS/GeneratedSource/cycfg_pins.h* for  the pin details such as CYBSP_WIFI_HOST_WAKE.
 
 The Makefile specifies that the application should use the custom configuration instead of the default configuration by adding `"CUSTOM_DESIGN_MODUS"` to the `COMPONENTS` variable and adding `"BSP_DESIGN_MODUS"` to the `DISABLE_COMPONENTS` variable. This custom configuration has the necessary settings enabled for the feature to work except for the IP address of the server (your PC). 
 
@@ -314,7 +341,7 @@ Do the following to configure TCP keepalive in the *design.modus* file using the
 
             - **Interrupt Trigger Type**: Rising Edge
 
-        ![](images/configurator_pins_tab_43012.png)
+           ![](images/configurator_pins_tab_43012.png)
 
     - **CY8CPROTO-062-4343W**
 
@@ -328,23 +355,25 @@ Do the following to configure TCP keepalive in the *design.modus* file using the
 
             - **Interrupt Trigger Type**: Rising Edge
 
-        ![](images/configurator_pins_tab.png)
+           ![](images/configurator_pins_tab.png)
 
    **Note:** The Wi-Fi host driver takes care of the drive mode configuration of the host WAKE pin.
 
-3. Go to the tab for the connectivity device and configure the fields as follows. This configuration is applicable to all [supported kits](#supported-kits). Figure 5 shows the TCP keepalive Offload configuration for CY8CKIT-062S2-43012.
+3. Go to the tab for the connectivity device and configure the fields as follows. This configuration is applicable to all [supported kits](#supported-kits). Figure 5 shows the TCP keepalive offload configuration for CY8CKIT-062S2-43012.
    
      1. Click on the connectivity device at the top, expand the **Power** option from the list, and then click **Wi-Fi**.
 
         **Figure 3. Navigate to Wi-Fi Device Section**
+
         ![](images/tcpka_configuration.png)
 
      1. Enable Host Wake Configuration and set **Host Device Interrupt Pin** to **CYBSP_WIFI_HOST_WAKE**.
 
         **Figure 4. Host Wake Pin**
+
         ![](images/host_wake_pin.png)
 
-     2. Enable TCP keepalive Offload.
+     2. Enable TCP keepalive offload.
 
      3. Configure the Interval, Retry Interval, and Retry Count as required by the application. All values are in seconds.
 
@@ -357,6 +386,7 @@ Do the following to configure TCP keepalive in the *design.modus* file using the
         - **Destination IP Address**: IP address of the server (the PC running TCP server). Get the IP address of the PC once it gets connected to the Wi-Fi network.
 
         **Figure 5. Wi-Fi Configuration**
+
         ![](images/configurator_wifi_tab.png)
 
 4. Select **File** > **Save**. 
@@ -374,20 +404,22 @@ Do the following to configure TCP keepalive in the *design.modus* file using the
 | **Device Documentation**                                     |                                                              |
 | [PSoC 6 MCU Datasheets](https://www.cypress.com/search/all?f[0]=meta_type%3Atechnical_documents&f[1]=resource_meta_type%3A575&f[2]=field_related_products%3A114026) | [PSoC 6 Technical Reference Manuals](https://www.cypress.com/search/all/PSoC%206%20Technical%20Reference%20Manual?f[0]=meta_type%3Atechnical_documents&f[1]=resource_meta_type%3A583) |
 | **Development Kits**                                         | Buy at www.cypress.com                                       |
-| [CY8CKIT-062S2-43012](https://www.cypress.com/CY8CKIT-062S2-43012) PSoC 62S2 Wi-Fi BT Pioneer Kit | [CY8CPROTO-062S3-4343W](https://www.cypress.com/CY8CPROTO-062S3-4343W) PSoC 62S3 Wi-Fi BT Prototyping Kit |                                                             |
-| **Libraries**                                                |                                                              |
-| PSoC 6 Peripheral Driver Library (PDL) and docs                    | [psoc6pdl](https://github.com/cypresssemiconductorco/psoc6pdl) on GitHub |
-| Cypress Hardware Abstraction Layer (HAL) Library and docs          | [psoc6hal](https://github.com/cypresssemiconductorco/psoc6hal) on GitHub |
-| RetargetIO - A utility library to retarget the standard input/output (STDIO) messages to a UART port | [retarget-io](https://github.com/cypresssemiconductorco/retarget-io) on GitHub |
+| [CY8CKIT-062-WiFi-BT](https://www.cypress.com/CY8CKIT-062-WiFi-BT) PSoC 6 WiFi-BT Pioneer Kit | [CY8CPROTO-062-4343W](https://www.cypress.com/CY8CPROTO-062-4343W) PSoC 6 Wi-Fi BT Prototyping Kit |
+| [CY8CKIT-062S2-43012](https://www.cypress.com/CY8CKIT-062S2-43012) PSoC 62S2 Wi-Fi BT Pioneer Kit | [CYW9P62S1-43438EVB-01](https://www.cypress.com/CYW9P62S1-43438EVB-01) PSoC 62S1 Wi-Fi BT Pioneer Kit |
+| [CYW9P62S1-43012EVB-01](https://www.cypress.com/CYW9P62S1-43012EVB-01) PSoC 62S1 Wi-Fi BT Pioneer Kit |
+| **Libraries**                                                 |                                                              |
+| PSoC 6 Peripheral Driver Library (PDL) and docs  | [mtb-pdl-cat1](https://github.com/cypresssemiconductorco/mtb-pdl-cat1) on GitHub |
+| Cypress Hardware Abstraction Layer (HAL) Library and docs     | [mtb-hal-cat1](https://github.com/cypresssemiconductorco/mtb-hal-cat1) on GitHub |
+| Retarget IO - A utility library to retarget the standard input/output (STDIO) messages to a UART port | [retarget-io](https://github.com/cypresssemiconductorco/retarget-io) on GitHub |
 | **Middleware**                                               |                                                              |
 | Low Power Assistant (LPA)                    | [lpa](https://github.com/cypresssemiconductorco/lpa) on GitHub |
 | Wi-Fi Connection Manager (WCM)                                    | [wifi-connection-manager](https://github.com/cypresssemiconductorco/wifi-connection-manager) on GitHub |
 | Wi-Fi Middleware core | [wifi-mw-core](https://github.com/cypresssemiconductorco/wifi-mw-core) on GitHub |
 | Connectivity-Utilities                                    | [connectivity-utilities](https://github.com/cypresssemiconductorco/connectivity-utilities) on GitHub |
-| Links to all PSoC 6 MCU Middleware                               | [psoc6-middleware](https://github.com/cypresssemiconductorco/psoc6-middleware) on GitHub |
+| Links to all PSoC 6 MCU Middleware                           | [psoc6-middleware](https://github.com/cypresssemiconductorco/psoc6-middleware) on GitHub |
 | **Tools**                                                    |                                                              |
-| [Eclipse IDE for ModusToolbox](https://www.cypress.com/modustoolbox)     | The multi-platform, Eclipse-based Integrated Development Environment (IDE) that supports application configuration and development for PSoC 6 MCU and IoT designers.             |
-| [PSoC Creator](https://www.cypress.com/products/psoc-creator-integrated-design-environment-ide) | The Cypress IDE for PSoC and FM0+ MCU development.            |
+| [Eclipse IDE for ModusToolbox](https://www.cypress.com/modustoolbox)     | The cross-platform, Eclipse-based IDE for IoT designers that supports application configuration and development targeting converged MCU and wireless systems.             |
+| [PSoC Creator™](https://www.cypress.com/products/psoc-creator-integrated-design-environment-ide) | The Cypress IDE for PSoC and FM0+ MCU development.            |
 
 ## Other Resources
 
@@ -397,21 +429,22 @@ For PSoC 6 MCU devices, see [How to Design with PSoC 6 MCU - KBA223067](https://
 
 ## Document History
 
-Document Title: CE229926 - AnyCloud Example: WLAN TCP Keepalive Offload
+Document Title: *CE229926* - *AnyCloud Example: WLAN TCP Keepalive Offload*
 
-| Version | Description of Change |
-| ------- | --------------------- |
-| 1.0.0   | New code example      |
+| Version | Description of Change                                        |
+| ------- | ------------------------------------------------------------ |
+| 1.0.0   | New code example                                             |
 | 1.1.0   | Fixed IAR compiler warning and minor changes to the Makefile |
+| 2.0.0   | Major update to support ModusToolbox software v2.2 and LPA v3.0.0.<br/>This version is not backward compatible with ModusToolbox software v2.1. |
 
 ------
 
 All other trademarks or registered trademarks referenced herein are the property of their respective owners.
 
-![banner](images/footer_banner.png)
+![banner](images/ifx-cy-banner.png)
 
 -------------------------------------------------------------------------------
 
-© Cypress Semiconductor Corporation, 2020. This document is the property of Cypress Semiconductor Corporation and its subsidiaries ("Cypress"). This document, including any software or firmware included or referenced in this document ("Software"), is owned by Cypress under the intellectual property laws and treaties of the United States and other countries worldwide. Cypress reserves all rights under such laws and treaties and does not, except as specifically stated in this paragraph, grant any license under its patents, copyrights, trademarks, or other intellectual property rights. If the Software is not accompanied by a license agreement and you do not otherwise have a written agreement with Cypress governing the use of the Software, then Cypress hereby grants you a personal, non-exclusive, nontransferable license (without the right to sublicense) (1) under its copyright rights in the Software (a) for Software provided in source code form, to modify and reproduce the Software solely for use with Cypress hardware products, only internally within your organization, and (b) to distribute the Software in binary code form externally to end users (either directly or indirectly through resellers and distributors), solely for use on Cypress hardware product units, and (2) under those claims of Cypress's patents that are infringed by the Software (as provided by Cypress, unmodified) to make, use, distribute, and import the Software solely for use with Cypress hardware products. Any other use, reproduction, modification, translation, or compilation of the Software is prohibited.  
-TO THE EXTENT PERMITTED BY APPLICABLE LAW, CYPRESS MAKES NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, WITH REGARD TO THIS DOCUMENT OR ANY SOFTWARE OR ACCOMPANYING HARDWARE, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. No computing device can be absolutely secure. Therefore, despite security measures implemented in Cypress hardware or software products, Cypress shall have no liability arising out of any security breach, such as unauthorized access to or use of a Cypress product. CYPRESS DOES NOT REPRESENT, WARRANT, OR GUARANTEE THAT CYPRESS PRODUCTS, OR SYSTEMS CREATED USING CYPRESS PRODUCTS, WILL BE FREE FROM CORRUPTION, ATTACK, VIRUSES, INTERFERENCE, HACKING, DATA LOSS OR THEFT, OR OTHER SECURITY INTRUSION (collectively, "Security Breach"). Cypress disclaims any liability relating to any Security Breach, and you shall and hereby do release Cypress from any claim, damage, or other liability arising from any Security Breach. In addition, the products described in these materials may contain design defects or errors known as errata which may cause the product to deviate from published specifications. To the extent permitted by applicable law, Cypress reserves the right to make changes to this document without further notice. Cypress does not assume any liability arising out of the application or use of any product or circuit described in this document. Any information provided in this document, including any sample design information or programming code, is provided only for reference purposes. It is the responsibility of the user of this document to properly design, program, and test the functionality and safety of any application made of this information and any resulting product. "High-Risk Device" means any device or system whose failure could cause personal injury, death, or property damage. Examples of High-Risk Devices are weapons, nuclear installations, surgical implants, and other medical devices. "Critical Component" means any component of a High-Risk Device whose failure to perform can be reasonably expected to cause, directly or indirectly, the failure of the High-Risk Device, or to affect its safety or effectiveness. Cypress is not liable, in whole or in part, and you shall and hereby do release Cypress from any claim, damage, or other liability arising from any use of a Cypress product as a Critical Component in a High-Risk Device. You shall indemnify and hold Cypress, its directors, officers, employees, agents, affiliates, distributors, and assigns harmless from and against all claims, costs, damages, and expenses, arising out of any claim, including claims for product liability, personal injury or death, or property damage arising from any use of a Cypress product as a Critical Component in a High-Risk Device. Cypress products are not intended or authorized for use as a Critical Component in any High-Risk Device except to the limited extent that (i) Cypress's published data sheet for the product explicitly states Cypress has qualified the product for use in a specific High-Risk Device, or (ii) Cypress has given you advance written authorization to use the product as a Critical Component in the specific High-Risk Device and you have signed a separate indemnification agreement.  
+© Cypress Semiconductor Corporation, 2020. This document is the property of Cypress Semiconductor Corporation and its subsidiaries ("Cypress"). This document, including any software or firmware included or referenced in this document ("Software"), is owned by Cypress under the intellectual property laws and treaties of the United States and other countries worldwide. Cypress reserves all rights under such laws and treaties and does not, except as specifically stated in this paragraph, grant any license under its patents, copyrights, trademarks, or other intellectual property rights. If the Software is not accompanied by a license agreement and you do not otherwise have a written agreement with Cypress governing the use of the Software, then Cypress hereby grants you a personal, non-exclusive, nontransferable license (without the right to sublicense) (1) under its copyright rights in the Software (a) for Software provided in source code form, to modify and reproduce the Software solely for use with Cypress hardware products, only internally within your organization, and (b) to distribute the Software in binary code form externally to end users (either directly or indirectly through resellers and distributors), solely for use on Cypress hardware product units, and (2) under those claims of Cypress's patents that are infringed by the Software (as provided by Cypress, unmodified) to make, use, distribute, and import the Software solely for use with Cypress hardware products. Any other use, reproduction, modification, translation, or compilation of the Software is prohibited.<br/>
+TO THE EXTENT PERMITTED BY APPLICABLE LAW, CYPRESS MAKES NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, WITH REGARD TO THIS DOCUMENT OR ANY SOFTWARE OR ACCOMPANYING HARDWARE, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. No computing device can be absolutely secure. Therefore, despite security measures implemented in Cypress hardware or software products, Cypress shall have no liability arising out of any security breach, such as unauthorized access to or use of a Cypress product. CYPRESS DOES NOT REPRESENT, WARRANT, OR GUARANTEE THAT CYPRESS PRODUCTS, OR SYSTEMS CREATED USING CYPRESS PRODUCTS, WILL BE FREE FROM CORRUPTION, ATTACK, VIRUSES, INTERFERENCE, HACKING, DATA LOSS OR THEFT, OR OTHER SECURITY INTRUSION (collectively, "Security Breach"). Cypress disclaims any liability relating to any Security Breach, and you shall and hereby do release Cypress from any claim, damage, or other liability arising from any Security Breach. In addition, the products described in these materials may contain design defects or errors known as errata which may cause the product to deviate from published specifications. To the extent permitted by applicable law, Cypress reserves the right to make changes to this document without further notice. Cypress does not assume any liability arising out of the application or use of any product or circuit described in this document. Any information provided in this document, including any sample design information or programming code, is provided only for reference purposes. It is the responsibility of the user of this document to properly design, program, and test the functionality and safety of any application made of this information and any resulting product. "High-Risk Device" means any device or system whose failure could cause personal injury, death, or property damage. Examples of High-Risk Devices are weapons, nuclear installations, surgical implants, and other medical devices. "Critical Component" means any component of a High-Risk Device whose failure to perform can be reasonably expected to cause, directly or indirectly, the failure of the High-Risk Device, or to affect its safety or effectiveness. Cypress is not liable, in whole or in part, and you shall and hereby do release Cypress from any claim, damage, or other liability arising from any use of a Cypress product as a Critical Component in a High-Risk Device. You shall indemnify and hold Cypress, its directors, officers, employees, agents, affiliates, distributors, and assigns harmless from and against all claims, costs, damages, and expenses, arising out of any claim, including claims for product liability, personal injury or death, or property damage arising from any use of a Cypress product as a Critical Component in a High-Risk Device. Cypress products are not intended or authorized for use as a Critical Component in any High-Risk Device except to the limited extent that (i) Cypress's published data sheet for the product explicitly states Cypress has qualified the product for use in a specific High-Risk Device, or (ii) Cypress has given you advance written authorization to use the product as a Critical Component in the specific High-Risk Device and you have signed a separate indemnification agreement.<br/>
 Cypress, the Cypress logo, Spansion, the Spansion logo, and combinations thereof, WICED, PSoC, CapSense, EZ-USB, F-RAM, and Traveo are trademarks or registered trademarks of Cypress in the United States and other countries. For a more complete list of Cypress trademarks, visit cypress.com. Other names and brands may be claimed as property of their respective owners.
