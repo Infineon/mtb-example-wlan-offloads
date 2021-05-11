@@ -41,6 +41,8 @@
 * so agrees to indemnify Cypress against all liability.
 *******************************************************************************/
 
+#include <inttypes.h>
+
 /* LPA header file */
 #include "cy_OlmInterface.h"
 #include "network_activity_handler.h"
@@ -181,7 +183,7 @@ cy_rslt_t tcp_socket_connection_start(void)
 
     result = cy_socket_init();
 
-    PRINT_AND_ASSERT(result, "%s Socket initialization failed. Error code:%ld\n", __func__, result);
+    PRINT_AND_ASSERT(result, "%s Socket initialization failed. Error code:%"PRIu32"\n", __func__, result);
 
     /* Take reference to the configured offload list */
     offload_list = find_my_tko_descriptor(TCP_KEEPALIVE_OFFLOAD);
@@ -227,7 +229,7 @@ cy_rslt_t tcp_socket_connection_start(void)
 
                  if (CY_RSLT_SUCCESS != result)
                  {
-                     ERR_INFO(("Socket[%d]: ERROR %ld, Unable to connect. TCP Server IP: %s, Local Port: %d, "
+                     ERR_INFO(("Socket[%d]: ERROR %"PRIu32", Unable to connect. TCP Server IP: %s, Local Port: %d, "
                                                        "Remote Port: %d\n", index, result, port->remote_ip,
                                                                       port->local_port, port->remote_port));
                      socket_connection_status = result;
