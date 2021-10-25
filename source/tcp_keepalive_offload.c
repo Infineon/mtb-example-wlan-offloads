@@ -80,6 +80,13 @@ cy_wcm_ip_address_t ip_addr;
 /* TCP socket handle for each connection */
 struct cy_socket_ctx_t *global_socket[MAX_TKO] = { NULL };
 
+
+/*******************************************************************************
+* Function Prototypes
+********************************************************************************/
+void print_heap_usage(char *msg);
+
+
 /********************************************************************************
  * Function Name: find_my_tko_descriptor
  ********************************************************************************
@@ -152,6 +159,8 @@ void network_idle_task(void *arg)
          * and resumed by the offload manager.
          */
         vTaskDelay(pdMS_TO_TICKS(NETWORK_SUSPEND_DELAY_MS));
+        
+        print_heap_usage("In the sleep wake-up loop");
     }
 }
 
