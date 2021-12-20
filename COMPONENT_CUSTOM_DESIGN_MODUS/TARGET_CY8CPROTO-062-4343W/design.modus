@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Design version="12" device_library_hint_path="../../../mtb_shared/mtb-pdl-cat1/release-v2.2.0/devicesupport.xml" xmlns="http://cypress.com/xsd/cydesignfile_v3">
-    <ToolInfo version="2.3.0.4276"/>
+<Design version="12" xmlns="http://cypress.com/xsd/cydesignfile_v3">
+    <ToolInfo version="2.4.0.5972"/>
     <Devices>
         <Device mpn="CY8C624ABZI-S2D44">
             <BlockConfig>
@@ -104,6 +104,7 @@
                 </Block>
                 <Block location="ioss[0].port[1].pin[0]">
                     <Alias value="CYBSP_CSD_TX"/>
+                    <Alias value="CYBSP_CS_TX"/>
                     <Personality template="mxs40pin" version="1.1">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -266,6 +267,7 @@
                 </Block>
                 <Block location="ioss[0].port[8].pin[1]">
                     <Alias value="CYBSP_CSD_BTN0"/>
+                    <Alias value="CYBSP_CS_BTN0"/>
                     <Personality template="mxs40pin" version="1.1">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -279,6 +281,7 @@
                 </Block>
                 <Block location="ioss[0].port[8].pin[2]">
                     <Alias value="CYBSP_CSD_BTN1"/>
+                    <Alias value="CYBSP_CS_BTN1"/>
                     <Personality template="mxs40pin" version="1.1">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -292,6 +295,7 @@
                 </Block>
                 <Block location="ioss[0].port[8].pin[3]">
                     <Alias value="CYBSP_CSD_SLD0"/>
+                    <Alias value="CYBSP_CS_SLD0"/>
                     <Personality template="mxs40pin" version="1.1">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -305,6 +309,7 @@
                 </Block>
                 <Block location="ioss[0].port[8].pin[4]">
                     <Alias value="CYBSP_CSD_SLD1"/>
+                    <Alias value="CYBSP_CS_SLD1"/>
                     <Personality template="mxs40pin" version="1.1">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -318,6 +323,7 @@
                 </Block>
                 <Block location="ioss[0].port[8].pin[5]">
                     <Alias value="CYBSP_CSD_SLD2"/>
+                    <Alias value="CYBSP_CS_SLD2"/>
                     <Personality template="mxs40pin" version="1.1">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -331,6 +337,7 @@
                 </Block>
                 <Block location="ioss[0].port[8].pin[6]">
                     <Alias value="CYBSP_CSD_SLD3"/>
+                    <Alias value="CYBSP_CS_SLD3"/>
                     <Personality template="mxs40pin" version="1.1">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -344,6 +351,7 @@
                 </Block>
                 <Block location="ioss[0].port[8].pin[7]">
                     <Alias value="CYBSP_CSD_SLD4"/>
+                    <Alias value="CYBSP_CS_SLD4"/>
                     <Personality template="mxs40pin" version="1.1">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -357,6 +365,7 @@
                 </Block>
                 <Block location="peri[0].div_8[0]">
                     <Alias value="CYBSP_CSD_CLK_DIV"/>
+                    <Alias value="CYBSP_CS_CLK_DIV"/>
                     <Personality template="mxs40peripheralclock" version="1.0">
                         <Param id="intDivider" value="256"/>
                         <Param id="fracDivider" value="0"/>
@@ -383,12 +392,6 @@
                     </Personality>
                 </Block>
                 <Block location="srss[0].clock[0].hfclk[0]">
-                    <Personality template="mxs40hfclk" version="1.1">
-                        <Param id="sourceClockNumber" value="0"/>
-                        <Param id="divider" value="1"/>
-                    </Personality>
-                </Block>
-                <Block location="srss[0].clock[0].hfclk[4]">
                     <Personality template="mxs40hfclk" version="1.1">
                         <Param id="sourceClockNumber" value="0"/>
                         <Param id="divider" value="1"/>
@@ -442,6 +445,14 @@
                 <Block location="srss[0].clock[0].periclk[0]">
                     <Personality template="mxs40periclk" version="1.0">
                         <Param id="divider" value="1"/>
+                    </Personality>
+                </Block>
+                <Block location="srss[0].clock[0].pll[0]">
+                    <Personality template="mxs40pll" version="2.0">
+                        <Param id="lowFrequencyMode" value="false"/>
+                        <Param id="configuration" value="auto"/>
+                        <Param id="desiredFrequency" value="48.000"/>
+                        <Param id="optimization" value="MinPower"/>
                     </Personality>
                 </Block>
                 <Block location="srss[0].clock[0].slowclk[0]">

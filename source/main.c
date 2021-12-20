@@ -63,6 +63,14 @@
  */
 #include "tcp_keepalive_offload.h"
 
+/* Include serial flash library and QSPI memory configurations only for the
+ * kits that require the Wi-Fi firmware to be loaded in external QSPI NOR flash.
+ */
+#if defined(TARGET_CY8CPROTO_062S3_4343W)
+#include "cy_serial_flash_qspi.h"
+#include "cycfg_qspi_memslot.h"
+#endif
+
 /*******************************************************************************
 * Macros
 ********************************************************************************/
@@ -104,6 +112,16 @@ int main(void)
     /* Initialize retarget-io to use the debug UART port */
     cy_retarget_io_init(CYBSP_DEBUG_UART_TX, CYBSP_DEBUG_UART_RX,
                                         CY_RETARGET_IO_BAUDRATE);
+
+    #if defined(TARGET_CY8CPROTO_062S3_4343W)
+    const uint32_t bus_frequency = 50000000lu;
+
+    cy_serial_flash_qspi_init(smifMemConfigs[0], CYBSP_QSPI_D0, CYBSP_QSPI_D1,
+                                  CYBSP_QSPI_D2, CYBSP_QSPI_D3, NC, NC, NC, NC,
+                                  CYBSP_QSPI_SCK, CYBSP_QSPI_SS, bus_frequency);
+
+    cy_serial_flash_qspi_enable_xip(true);
+    #endif
 
     /* \x1b[2J\x1b[;H - ANSI ESC sequence to clear screen */
     APP_INFO(("\x1b[2J\x1b[;H"));

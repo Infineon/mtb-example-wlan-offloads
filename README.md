@@ -6,20 +6,20 @@ The TCP keepalive offload functionality allows the WLAN device to handle TCP kee
 
 [View this README on GitHub.](https://github.com/Infineon/mtb-example-anycloud-offload-tcp-keepalive)
 
-[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyMjk5MjYiLCJTcGVjIE51bWJlciI6IjAwMi0yOTkyNiIsIkRvYyBUaXRsZSI6IldMQU4gVENQIGtlZXBhbGl2ZSBvZmZsb2FkIiwicmlkIjoic2RhayIsIkRvYyB2ZXJzaW9uIjoiMi4zLjAiLCJEb2MgTGFuZ3VhZ2UiOiJFbmdsaXNoIiwiRG9jIERpdmlzaW9uIjoiTUNEIiwiRG9jIEJVIjoiSUNXIiwiRG9jIEZhbWlseSI6IlBTT0MifQ==)
+[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyMjk5MjYiLCJTcGVjIE51bWJlciI6IjAwMi0yOTkyNiIsIkRvYyBUaXRsZSI6IldMQU4gVENQIGtlZXBhbGl2ZSBvZmZsb2FkIiwicmlkIjoic2RhayIsIkRvYyB2ZXJzaW9uIjoiMy4wLjAiLCJEb2MgTGFuZ3VhZ2UiOiJFbmdsaXNoIiwiRG9jIERpdmlzaW9uIjoiTUNEIiwiRG9jIEJVIjoiSUNXIiwiRG9jIEZhbWlseSI6IlBTT0MifQ==)
 
 ## Requirements
 
-- [ModusToolbox&trade; software](https://www.cypress.com/products/modustoolbox-software-environment) v2.3 with ModusToolbox&trade; software tools patch 2.3.1
-- Board support package (BSP) minimum required version: 2.0.0
+- [ModusToolbox&trade; software](https://www.cypress.com/products/modustoolbox-software-environment) v2.4
+- Board support package (BSP) minimum required version: 3.0.0
 - Programming language: C
-- Associated parts: All [PSoC&trade; 6 MCU](https://www.cypress.com/PSoC6) parts, [AIROC™ CYW20735 Bluetooth® & Bluetooth® LE system-on-chip](https://www.cypress.com/products/cyw20735), [AIROC™ CYW20819 Bluetooth® & Bluetooth® LE system-on-chip](https://www.cypress.com/products/cyw20819), [AIROC™ CYW43012 Wi-Fi & Bluetooth® combo chip](https://www.cypress.com/products/cyw43012), [AIROC™ CYW4332W Wi-Fi & Bluetooth® combo chip](https://www.cypress.com/products/cyw4343w)
+- Associated parts: All [PSoC&trade; 6 MCU](https://www.cypress.com/PSoC6) parts
 
 
 
 ## Supported toolchains (make variable 'TOOLCHAIN')
 
-- GNU Arm® embedded compiler v9.3.1 (`GCC_ARM`) - Default value of `TOOLCHAIN`
+- GNU Arm® embedded compiler v10.3.1 (`GCC_ARM`) - Default value of `TOOLCHAIN`
 - Arm&reg; compiler v6.13 (`ARM`)
 - IAR C/C++ compiler v8.42.2 (`IAR`)
 
@@ -30,8 +30,8 @@ The TCP keepalive offload functionality allows the WLAN device to handle TCP kee
 - [PSoC&trade; 62S2 Wi-Fi Bluetooth&reg; pioneer kit](https://www.cypress.com/CY8CKIT-062S2-43012) (`CY8CKIT-062S2-43012`)
 - [PSoC&trade; 62S1 Wi-Fi Bluetooth&reg; pioneer kit](https://www.cypress.com/CYW9P62S1-43438EVB-01) (`CYW9P62S1-43438EVB-01`)
 - [PSoC&trade; 62S1 Wi-Fi Bluetooth&reg; pioneer kit](https://www.cypress.com/CYW9P62S1-43012EVB-01) (`CYW9P62S1-43012EVB-01`)
-- [PSoC&trade; 64 "Secure Boot" Wi-Fi Bluetooth&reg; pioneer kit](https://www.cypress.com/CY8CKIT-064B0S2-4343W) (`CY8CKIT-064B0S2-4343W`)
-- [PSoC&trade; 62S2 evaluation kit](https://www.cypress.com/CY8CEVAL-062S2) (`CY8CEVAL-062S2-LAI-4373M2`)
+- [PSoC&trade; 62S3 Wi-Fi Bluetooth&reg; prototyping kit](https://www.cypress.com/CY8CPROTO-062S3-4343W) (`CY8CPROTO-062S3-4343W`)
+- [PSoC&trade; 62S2 evaluation kit](https://www.cypress.com/CY8CEVAL-062S2) (`CY8CEVAL-062S2-LAI-4373M2`, `CY8CEVAL-062S2-MUR-43439M2`)
 - Rapid IoT Connect developer kit (`CYSBSYSKIT-DEV-01`)
 
 ## Hardware setup
@@ -43,7 +43,7 @@ This example uses the board's default configuration. See the kit user guide to e
 
 ## Software setup
 
-Install a terminal emulator if you do not have one. Instructions in this document use [Tera Term](https://ttssh2.osdn.jp/index.html.en).
+Install a terminal emulator if you don't have one. Instructions in this document use [Tera Term](https://ttssh2.osdn.jp/index.html.en).
 
 Install a Python interpreter if you do not have one. This code example is tested with [Python 3.7.7](https://www.python.org/downloads/release/python-377/).
 
@@ -207,7 +207,7 @@ If using a PSoC&trade; 64 "Secure" MCU kit (like CY8CKIT-064B0S2-4343W), the PSo
 
     Network Stack Suspended, MCU will enter DeepSleep power mode
     ```
-8. Use the TCPDUMP utility to capture the over-the-air TCP keepalive packets between the client (target kit) and the server (PC). See [Software setup](#software-setup) to download this tool for Windows. On Ubuntu and macOS, this utility is natively available.
+8. Use the TCPDUMP utility to capture the over-the-air TCP keepalive packets between the client (target kit) and the server (PC). See the [Software setup](#software-setup) to download this tool for Windows. On Ubuntu and macOS, this utility is natively available.
 
    **Ubuntu OS:**
    ```
@@ -341,11 +341,11 @@ Therefore, TCP keepalive packets can be used in checking for dead peers or for p
 
 Typically, TCP keepalive packets are sent every 45 or 60 seconds on an idle TCP connection; the connection is dropped after three sequential ACKs are missed. This means that the host MCU must wake up periodically to send TCP keepalive packets to maintain the TCP connection during the idle state.
 
-The TCP keepalive offload part of the LPA helps you improve the power consumption of your connected system by reducing the time the host needs to stay awake to support TCP keepalive requests. This is achieved by offloading the TCP keepalive functionality to the WLAN device so that the host MCU can be dedicated for your application.
+The TCP keepalive offloads part of the LPA helps you improve the power consumption of your connected system by reducing the time the host needs to stay awake to support TCP keepalive requests. This is achieved by offloading the TCP keepalive functionality to the WLAN device so that the host MCU can be dedicated to your application.
 
 This section describes how to enable TCP keepalive offload and configure four different sockets for TCP connections.
 
-Figure 2 shows that the host wakes up for incoming TCP traffic when offload is not enabled. On the other hand, the host can save more power by entering and staying in deep sleep for a longer time when the TCP keepalive activity is offloaded to the WLAN device.
+**Figure 2** shows that the host wakes up for incoming TCP traffic when offload is not enabled. On the other hand, the host can save more power by entering and staying in deep sleep for a longer time when the TCP keepalive activity is offloaded to the WLAN device.
 
 **Figure 2. TCP keepalive offload disabled vs. enabled**
 
@@ -356,7 +356,7 @@ Figure 2 shows that the host wakes up for incoming TCP traffic when offload is n
 
 The application does the following when the kit is powered up:
 
-1. Initializes the WLAN device as a STA (Station) interface.
+1. Initializes the WLAN device as an STA (Station) interface.
 
 2. Initializes the offload manager (OLM) with the configuration present in the *GeneratedSources/cycfg_connectivity_wifi.c/.h* files inside *COMPONENT_CUSTOM_DESIGN_MODUS/TARGET_\<kit>*, where the source code for the feature is generated by the device configurator tool in the IDE. The offload manager will be initialized based on the *GeneratedSources* configuration.
 
@@ -378,7 +378,7 @@ The Makefile specifies that the application should use the custom configuration 
 
 Do the following to configure TCP keepalive in the *design.modus* file using the device configurator tool:
 
-**Note:** These steps are already handled in this application except for the IP address of the server (your PC). They are provided only for informational purpose.
+**Note:** These steps are already handled in this application except for the IP address of the server (your PC). They are provided only for informational purposes.
 
 1. Open Device Configurator from the **Quick Panel** when using Eclipse IDE for ModusToolbox&trade;, or through the `make config` command from the root directory of the code example repository.
 
@@ -398,7 +398,7 @@ Do the following to configure TCP keepalive in the *design.modus* file using the
 
       ![](images/configurator_pins_tab_43012.png)
 
-   <br>
+<br>
 
    **CY8CPROTO-062-4343W:**
 
@@ -418,11 +418,11 @@ Do the following to configure TCP keepalive in the *design.modus* file using the
 
    **Note:** The Wi-Fi host driver takes care of the drive mode configuration of the host WAKE pin.
 
-3. Go to the tab for the connectivity device and configure the fields as follows. This configuration is applicable to all [supported kits](#supported-kits). Figure 5 shows the TCP keepalive offload configuration for CY8CKIT-062S2-43012.
+3. Go to the tab for the connectivity device and configure the fields as follows. This configuration is applicable to all [supported kits](#supported-kits). **Figure 5** shows the TCP keepalive offload configuration for CY8CKIT-062S2-43012.
 
      1. Click on the connectivity device at the top, expand the **Power** option from the list, and then click **Wi-Fi**.
 
-        **Figure 3. Navigate to Wi-Fi device section**
+        **Figure 3. Navigate to the Wi-Fi device section**
 
         ![](images/tcpka_configuration.png)
 
@@ -486,6 +486,9 @@ Document title: *CE229926* - *WLAN TCP keepalive offload*
  2.1.0   | Added support for Rapid IoT Connect developer kit (CYSBSYSKIT-DEV-01)
  2.2.0   | Updated to FreeRTOS v10.3.1
  2.3.0   | Updated to FreeRTOS v10.4.3 <br> Added support for new kits |
+ 3.0.0   | Updated to support ModusToolbox™ software v2.4 <br> Added support for new kits <br> Updated the BSPs to v3.X
+
+<br>
 
 ---------------------------------------------------------
 
