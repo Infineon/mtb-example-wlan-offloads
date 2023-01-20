@@ -6,7 +6,7 @@
 * Related Document: See README.md
 *
 ********************************************************************************
-* Copyright 2020-2021, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2020-2023, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
@@ -44,6 +44,9 @@
 /* FreeRTOS header files */
 #include <FreeRTOS.h>
 #include <task.h>
+
+#include <cy_lpa_wifi_ol.h>
+
 
 /*******************************************************************************
 * Macros

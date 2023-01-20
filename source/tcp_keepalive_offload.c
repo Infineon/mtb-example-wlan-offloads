@@ -9,7 +9,7 @@
 * Related Document: See README.md
 *
 ********************************************************************************
-* Copyright 2020-2021, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2020-2023, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
@@ -48,7 +48,11 @@
 #include "network_activity_handler.h"
 
 /* lwIP header file */
-#include "cy_lwip.h"
+#include "lwip/dhcp.h"
+#include "lwip/ip4_addr.h"      // NOTE: LwIP specific - ip4_addr
+#include "lwip/netif.h"         // NOTE: LwIP specific - for etharp_cleanup_netif()
+#include "lwip/etharp.h"        // NOTE: LwIP specific - for netif_list for use in etharp_cleanup_netif() call
+#include "cy_network_mw_core.h"
 
 /* Socket management header file */
 #include "cy_secure_sockets.h"
@@ -143,7 +147,7 @@ const ol_desc_t *find_my_tko_descriptor(const char *name)
  *******************************************************************************/
 void network_idle_task(void *arg)
 {
-    struct netif* wifi = cy_lwip_get_interface(CY_LWIP_STA_NW_INTERFACE);
+    struct netif* wifi = (struct netif*)cy_network_get_nw_interface(CY_NETWORK_WIFI_STA_INTERFACE, 0U);
 
     while( true )
     {
@@ -187,7 +191,7 @@ cy_rslt_t tcp_socket_connection_start(void)
     cy_rslt_t result = CY_RSLT_SUCCESS;
     const cy_tko_ol_connect_t *port;
     int index = 0;
-    struct netif *netif = cy_lwip_get_interface(CY_LWIP_STA_NW_INTERFACE);
+    struct netif *netif = (struct netif *)cy_network_get_nw_interface(CY_NETWORK_WIFI_STA_INTERFACE, 0U);
     cy_rslt_t socket_connection_status = CY_RSLT_SUCCESS;
 
     result = cy_socket_init();

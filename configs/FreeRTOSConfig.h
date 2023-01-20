@@ -4,7 +4,7 @@
 * Description: This is the configuration file for FreeRTOS parameters
 *
 *******************************************************************************
-* Copyright 2020-2021, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2020-2023, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
@@ -107,7 +107,7 @@
 #define configUSE_TIMERS                        1
 #define configTIMER_TASK_PRIORITY               2
 #define configTIMER_QUEUE_LENGTH                10
-#define configTIMER_TASK_STACK_DEPTH            (configMINIMAL_STACK_SIZE * 2)
+#define configTIMER_TASK_STACK_DEPTH            (configMINIMAL_STACK_SIZE * 4)
 
 /*
 Interrupt nesting behavior configuration.
@@ -207,10 +207,10 @@ standard names - or at least those used in the unmodified vector table. */
 
 /* Enable low power tickless functionality. The RTOS abstraction library
  * provides the compatible implementation of the vApplicationSleep hook:
- * https://github.com/cypresssemiconductorco/abstraction-rtos#freertos
+ * https://github.com/Infineon/abstraction-rtos#freertos
  * The Low Power Assistant library provides additional portable configuration layer
  * for low-power features supported by the PSoC 6 devices:
- * https://github.com/cypresssemiconductorco/lpa
+ * https://github.com/Infineon/lpa
  */
 extern void vApplicationSleep( uint32_t xExpectedIdleTime );
 #define portSUPPRESS_TICKS_AND_SLEEP( xIdleTime ) vApplicationSleep( xIdleTime )
@@ -231,7 +231,7 @@ extern void vApplicationSleep( uint32_t xExpectedIdleTime );
  * GCC toolchain: the application must provide the implementation for the required
  * newlib hook functions: __malloc_lock, __malloc_unlock, __env_lock, __env_unlock.
  * FreeRTOS-compatible implementation is provided by the clib-support library:
- * https://github.com/cypresssemiconductorco/clib-support
+ * https://github.com/Infineon/clib-support
  *
  * ARM/IAR toolchains: the application must provide the reent.h header to adapt
  * FreeRTOS's configUSE_NEWLIB_REENTRANT to work with the toolchain-specific C library.
