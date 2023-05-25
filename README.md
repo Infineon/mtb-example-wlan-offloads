@@ -1,12 +1,12 @@
-# WLAN TCP keepalive offload
+# WLAN offloads
 
-This code example demonstrates the TCP keepalive offload functionality offered by Infineon AIROC&trade; Wi-Fi devices using PSoC&trade; 6 MCU. It employs the [low power assistant](https://github.com/Infineon/lpa) (LPA) middleware library, which helps in developing low-power applications for Infineon devices.
+This code example demonstrates various WLAN offloads such as Address Resolution Protocol (ARP) offload, packet filter offload, and the TCP keepalive offload functionality offered by Infineon AIROC&trade; Wi-Fi devices using PSoC&trade; 6 MCU. It employs the [low power assistant](https://github.com/Infineon/lpa) (LPA) middleware library, which helps in developing low-power applications for Infineon devices.
 
-The TCP keepalive offload functionality allows the WLAN device to handle TCP keepalive packets from the network on its own so that the PSoC&trade; 6 MCU can remain longer in the low-power mode.
+The WLAN offload functionalities allow the WLAN device to handle incoming TCP keepalive, ARP, and packet filter packets from the network on its own so that the PSoC&trade; 6 MCU remains longer in the low-power mode.
 
-[View this README on GitHub.](https://github.com/Infineon/mtb-example-wifi-offload-tcp-keepalive)
+[View this README on GitHub.](https://github.com/Infineon/mtb-example-wlan-offloads)
 
-[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyMjk5MjYiLCJTcGVjIE51bWJlciI6IjAwMi0yOTkyNiIsIkRvYyBUaXRsZSI6IldMQU4gVENQIGtlZXBhbGl2ZSBvZmZsb2FkIiwicmlkIjoic2RhayIsIkRvYyB2ZXJzaW9uIjoiNC4yLjAiLCJEb2MgTGFuZ3VhZ2UiOiJFbmdsaXNoIiwiRG9jIERpdmlzaW9uIjoiTUNEIiwiRG9jIEJVIjoiSUNXIiwiRG9jIEZhbWlseSI6IlBTT0MifQ==)
+[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyMjk5MjYiLCJTcGVjIE51bWJlciI6IjAwMi0yOTkyNiIsIkRvYyBUaXRsZSI6IldMQU4gb2ZmbG9hZHMiLCJyaWQiOiJzZGFrIiwiRG9jIHZlcnNpb24iOiI1LjAuMCIsIkRvYyBMYW5ndWFnZSI6IkVuZ2xpc2giLCJEb2MgRGl2aXNpb24iOiJNQ0QiLCJEb2MgQlUiOiJJQ1ciLCJEb2MgRmFtaWx5IjoiUFNPQyJ9)
 
 ## Requirements
 
@@ -25,31 +25,33 @@ The TCP keepalive offload functionality allows the WLAN device to handle TCP kee
 
 ## Supported kits (make variable 'TARGET')
 
-- [PSoC&trade; 6 Wi-Fi Bluetooth&reg; prototyping kit](https://www.infineon.com/CY8CPROTO-062-4343W) (`CY8CPROTO-062-4343W`) - Default value of `TARGET`
-- [PSoC&trade; 6 Wi-Fi Bluetooth&reg; pioneer kit](https://www.infineon.com/CY8CKIT-062-WIFI-BT) (`CY8CKIT-062-WIFI-BT`)
-- [PSoC&trade; 62S2 Wi-Fi Bluetooth&reg; pioneer kit](https://www.infineon.com/CY8CKIT-062S2-43012) (`CY8CKIT-062S2-43012`)
-- [PSoC&trade; 62S1 Wi-Fi Bluetooth&reg; pioneer kit](https://www.infineon.com/CYW9P62S1-43438EVB-01) (`CYW9P62S1-43438EVB-01`)
-- [PSoC&trade; 62S1 Wi-Fi Bluetooth&reg; pioneer kit](https://www.infineon.com/CYW9P62S1-43012EVB-01) (`CYW9P62S1-43012EVB-01`)
-- [PSoC&trade; 64 "Secure Boot" Wi-Fi Bluetooth&reg; pioneer kit](https://www.infineon.com/CY8CKIT-064B0S2-4343W) (`CY8CKIT-064B0S2-4343W`)
-- [PSoC&trade; 62S3 Wi-Fi Bluetooth&reg; prototyping kit](https://www.infineon.com/CY8CPROTO-062S3-4343W) (`CY8CPROTO-062S3-4343W`)
-- [PSoC&trade; 62S2 evaluation kit](https://www.infineon.com/CY8CEVAL-062S2) (`CY8CEVAL-062S2-LAI-4373M2`, `CY8CEVAL-062S2-MUR-43439M2`, `CY8CEVAL-062S2-LAI-43439M2`)
-- [PSoC&trade; 62S2 Wi-Fi Bluetooth&reg; prototyping kit](https://www.infineon.com/CY8CPROTO-062S2-43439) (`CY8CPROTO-062S2-43439`)
-- Rapid IoT Connect developer kit (`CYSBSYSKIT-DEV-01`)
+- [PSoC&trade; 6 Wi-Fi Bluetooth&reg; Prototyping Kit](https://www.infineon.com/CY8CPROTO-062-4343W) (`CY8CPROTO-062-4343W`) - Default value of `TARGET`
+- [PSoC&trade; 6 Wi-Fi Bluetooth&reg; Pioneer Kit](https://www.infineon.com/CY8CKIT-062-WIFI-BT) (`CY8CKIT-062-WIFI-BT`)
+- [PSoC&trade; 62S2 Wi-Fi Bluetooth&reg; Pioneer Kit](https://www.infineon.com/CY8CKIT-062S2-43012) (`CY8CKIT-062S2-43012`)
+- [PSoC&trade; 62S1 Wi-Fi Bluetooth&reg; Pioneer Kit](https://www.infineon.com/CYW9P62S1-43438EVB-01) (`CYW9P62S1-43438EVB-01`)
+- [PSoC&trade; 62S1 Wi-Fi Bluetooth&reg; Pioneer Kit](https://www.infineon.com/CYW9P62S1-43012EVB-01) (`CYW9P62S1-43012EVB-01`)
+- [PSoC&trade; 64 "Secure Boot" Wi-Fi Bluetooth&reg; Pioneer Kit](https://www.infineon.com/CY8CKIT-064B0S2-4343W) (`CY8CKIT-064B0S2-4343W`)
+- [PSoC&trade; 62S3 Wi-Fi Bluetooth&reg; Prototyping Kit](https://www.infineon.com/CY8CPROTO-062S3-4343W) (`CY8CPROTO-062S3-4343W`)
+- [PSoC&trade; 62S2 Evaluation Kit](https://www.infineon.com/CY8CEVAL-062S2) (`CY8CEVAL-062S2-LAI-4373M2`, `CY8CEVAL-062S2-MUR-43439M2`, `CY8CEVAL-062S2-LAI-43439M2`)
+- [PSoC&trade; 62S2 Wi-Fi Bluetooth&reg; Prototyping Kit](https://www.infineon.com/CY8CPROTO-062S2-43439) (`CY8CPROTO-062S2-43439`)
+- Rapid IoT Connect Developer Kit (`CYSBSYSKIT-DEV-01`)
 
 ## Hardware setup
 
 This example uses the board's default configuration. See the kit user guide to ensure that the board is configured correctly.
 
-**Note:** The PSoC&trade; 6 Wi-Fi Bluetooth&reg; pioneer kit (CY8CKIT-062-WIFI-BT) ships with KitProg2 installed. The ModusToolbox&trade; software requires KitProg3. Before using this code example, make sure that the board is upgraded to KitProg3. The tool and instructions are available in the [Firmware Loader](https://github.com/Infineon/Firmware-loader) GitHub repository. If you do not upgrade, you will see an error like "unable to find CMSIS-DAP device" or "KitProg firmware is out of date".
+**Note:** The PSoC&trade; 6 Wi-Fi Bluetooth&reg; Pioneer Kit (CY8CKIT-062-WIFI-BT) ships with KitProg2 installed. The ModusToolbox&trade; software requires KitProg3. Before using this code example, make sure that the board is upgraded to KitProg3. The tool and instructions are available in the [Firmware Loader](https://github.com/Infineon/Firmware-loader) GitHub repository. If you do not upgrade, you will see an error like "unable to find CMSIS-DAP device" or "KitProg firmware is out of date".
 
 
 ## Software setup
 
 1. Install a terminal emulator if you don't have one. Instructions in this document use [Tera Term](https://ttssh2.osdn.jp/index.html.en).
-
-2. Install a Python interpreter if you don't have one. This code example is tested using [Python 3.7.7](https://www.python.org/downloads/release/python-377/).
-
-Download [TCPDUMP](https://www.microolap.com/products/network/tcpdump/download/) and extract the .zip file. This utility is needed to capture the TCP keepalive packets in Windows. This tool is natively available in macOS and Ubuntu.
+2. Install [Wireshark](https://www.wireshark.org/download.html) for capturing network packets over the air.
+3. Install the *ARP'ing* network utility:
+   - [Windows OS](https://www.elifulkerson.com/projects/arp-ping.php)
+   - [macOS](https://macappstore.org/arping/)
+   - On Linux, use the `sudo apt install arping` command. Most of the Ubuntu OS distributions have it natively available.
+4. Install a Python interpreter if you don't have one. This code example is tested using [Python 3.7.7](https://www.python.org/downloads/release/python-377/). 
 
 ## Using the code example
 
@@ -75,7 +77,7 @@ Create the project and open it using one of the following:
 
 6. Click **Create** to complete the application creation process.
 
-For more details, see the [Eclipse IDE for ModusToolbox&trade; software user guide](https://www.infineon.com/MTBEclipseIDEUserGuide) (locally available at *{ModusToolbox&trade; software install directory}/docs_{version}/mtb_ide_user_guide.pdf*).
+For more details, see the [Eclipse IDE for ModusToolbox&trade; software user guide](https://www.infineon.com/MTBEclipseIDEUserGuide) (locally available at *{ModusToolbox&trade; software install directory}/docs_{version}/mt_ide_user_guide.pdf*).
 
 </details>
 
@@ -96,10 +98,10 @@ Argument | Description | Required/optional
 
 <br />
 
-The following example clones the "[WLAN TCP keepalive offload](https://github.com/Infineon/mtb-example-wifi-offload-tcp-keepalive)" application with the desired name "TcpKeepalive" configured for the *CY8CPROTO-062-4343W* BSP into the specified working directory, *C:/mtb_projects*:
+The following example clones the "[WLAN offloads](https://github.com/Infineon/mtb-example-wifi-wlan-offloads)" application with the desired name "wlanoffloads" configured for the *CY8CPROTO-062-4343W* BSP into the specified working directory, *C:/mtb_projects*:
 
    ```
-   project-creator-cli --board-id CY8CPROTO-062-4343W --app-id mtb-example-wifi-offload-tcp-keepalive --user-app-name TcpKeepalive --target-dir "C:/mtb_projects"
+   project-creator-cli --board-id CY8CPROTO-062-4343W --app-id mtb-example-wifi-wlan-offloads --user-app-name wlanoffloads --target-dir "C:/mtb_projects"
    ```
 
 **Note:** The project-creator-cli tool uses the `git clone` and `make getlibs` commands to fetch the repository and import the required libraries. For details, see the "Project creator tools" section of the [ModusToolbox&trade; software user guide](https://www.infineon.com/ModusToolboxUserGuide) (locally available at *{ModusToolbox&trade; software install directory}/docs_{version}/mtb_user_guide.pdf*).
@@ -117,12 +119,12 @@ Argument | Description | Required/optional
 
 <br />
 
-Following example adds the CY8CKIT-062-WIFI-BT BSP to the already created application and makes it the active BSP for the app:
+Following example adds the CY8CPROTO-062-4343W BSP to the already created application and makes it the active BSP for the app:
 
    ```
-   library-manager-cli --project "C:/mtb_projects/TcpKeepalive" --add-bsp-name CY8CKIT-062-WIFI-BT --add-bsp-version "latest-v4.X" --add-bsp-location "local"
+    ~/ModusToolbox/tools_3.0/library-manager/library-manager-cli --project "C:/mtb_projects/wlanoffloads" --add-bsp-name CY8CPROTO-062-4343W --add-bsp-version "latest-v4.X" --add-bsp-location "local"
 
-   library-manager-cli --project "C:/mtb_projects/TcpKeepalive" --set-active-bsp APP_CY8CKIT-062-WIFI-BT
+    ~/ModusToolbox/tools_3.0/library-manager/library-manager-cli --project "C:/mtb_projects/wlanoffloads" --set-active-bsp APP_CY8CPROTO-062-4343W
    ```
 
 </details>
@@ -156,19 +158,20 @@ For a list of supported IDEs and more details, see the "Exporting to IDEs" secti
 </details>
 
 
-##  Operation
+## Operation
 
-If using a PSoC&trade; 64 "Secure" MCU kit (like CY8CKIT-064B0S2-4343W), the PSoC&trade; 64 device must be provisioned with keys and policies before being programmed. Follow the instructions in the ["Secure Boot" SDK user guide](https://www.infineon.com/dgdlac/Infineon-PSoC_64_Secure_MCU_Secure_Boot_SDK_User_Guide-Software-v07_00-EN.pdf?fileId=8ac78c8c7d0d8da4017d0f8c361a7666&utm_source=cypress&utm_medium=referral&utm_campaign=202110_globe_en_all_integration-software) to provision the device. If the kit is already provisioned, copy-paste the keys and policy folder to the application folder.
+
+If using a PSoC&trade; 64 "Secure" MCU kit (like CY8CKIT-064B0S2-4343W), the PSoC&trade; 64 device must be provisioned with keys and policies before being programmed. Follow the instructions in the ["Secure Boot" SDK user guide](https://www.infineon.com/dgdlac/Infineon-PSoC_64_Secure_MCU_Secure_Boot_SDK_User_Guide-Software-v07_00-EN.pdf?fileId=8ac78c8c7d0d8da4017d0f8c361a7666) to provision the device. If the kit is already provisioned, copy-paste the keys and policy folder to the application folder.
 
 1. Connect the board to your PC using the provided USB cable through the KitProg3 USB connector.
 
 2. Open *app_config.h* and modify the `WIFI_SSID`, `WIFI_PASSWORD`, and `WIFI_SECURITY_TYPE` macros to match the Wi-Fi network credentials that you want to connect to.
 
-   All possible security types are defined in the `cy_wcm_security_t` structure in *cy_wcm.h* file.
+   Defined all possible security types in the `cy_wcm_security_t` structure in *cy_wcm.h* file.
 
 3. Ensure that your PC is connected to the same Wi-Fi access point (AP) that you configured in Step 2.
 
-   The TCP keepalive settings are already done for this example in the device configurator except for the IP address of the server (your PC). See [Configure TCP keepalive using device configurator](#configure-tcp-keepalive-using-device-configurator) to learn how to configure the IP address of the server.
+   All WLAN offload settings are already done for this example in the device configurator except for the IP address of the server (your PC). See [Configure WLAN offloads using the device configurator](#configure-wlan-offloads-using-the-device-configurator) to learn how to configure the IP address of the server.
 
 4. Open a terminal program and select the KitProg3 COM port. Set the serial port parameters to 8N1 and 115200 baud.
 
@@ -179,7 +182,7 @@ If using a PSoC&trade; 64 "Secure" MCU kit (like CY8CKIT-064B0S2-4343W), the PSo
    ```
    python tcp_server.py --port 3360
    ```
-   where, `3360` is the port number of the server (destination port number), which is already configured in the device configurator.
+   where `3360` is the port number of the server (destination port number), which is already configured in the device configurator.
 
    **Note:** Ensure that the firewall settings of your PC allow access to the Python software so that it can communicate with the TCP client. See this [community thread](https://community.infineon.com/thread/53662).
 
@@ -209,7 +212,7 @@ If using a PSoC&trade; 64 "Secure" MCU kit (like CY8CKIT-064B0S2-4343W), the PSo
 
     ```
     Info: =====================================
-    Info: CE229926 - WLAN TCP Keepalive Offload
+    Info: CE229926 - WLAN Offloads
     Info: =====================================
 
     WLAN MAC Address : A0:C9:A0:3D:D3:6A
@@ -220,7 +223,7 @@ If using a PSoC&trade; 64 "Secure" MCU kit (like CY8CKIT-064B0S2-4343W), the PSo
     Info: Join to AP: WIFI_SSID
     Info: Successfully joined wifi network WIFI_SSID
     Info: Assigned IP address: 192.168.43.131
-    Info: Taking TCP Keepalive configuration from the Generated sources.
+    Info: Taking Offload manager configurations from the Generated sources.
     Info: Socket[0]: Created connection to IP 192.168.43.218, local port 3353, remote port 3360
     Info: Skipped TCP socket connection for socket id[1]. Check the TCP Keepalive configuration.
     Info: Skipped TCP socket connection for socket id[2]. Check the TCP Keepalive configuration.
@@ -229,106 +232,59 @@ If using a PSoC&trade; 64 "Secure" MCU kit (like CY8CKIT-064B0S2-4343W), the PSo
 
     Network Stack Suspended, MCU will enter DeepSleep power mode
     ```
-8. Use the TCPDUMP utility to capture the over-the-air TCP keepalive packets between the client (target kit) and the server (PC). See the [Software setup](#software-setup) to download this tool for Windows. On Ubuntu and macOS, this utility is natively available.
 
-   **Ubuntu OS:**
+8. Use the Wireshark sniffer tool for capturing TCP keepalive packets on Windows, Ubuntu, and macOS.
+
+      **Figure 1. TCP keepalive capture on Wireshark**
+
+      ![](images/wireshark_tko.png)
+
+
+9. Verify the functioning of ARP offload by sending an ARP request packet from your PC. Observe that the responses are received from the WLAN device without interrupting the host MCU from deep sleep.
+
    ```
-   $ sudo tcpdump -n "tcp[tcpflags] == tcp-syn or tcp[tcpflags] == tcp-ack" and port 3360
-   tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
-   listening on wlp3s0, link-type EN10MB (Ethernet), capture size 262144 bytes
-   15:18:34.457203 IP 192.168.43.131.3353 > 192.168.43.38.3360: Flags [.], ack 2994052043, win 9205, length 0
-   15:18:34.457274 IP 192.168.43.38.3360 > 192.168.43.131.3353: Flags [.], ack 1, win 29200, length 0
-   15:18:39.500001 IP 192.168.43.131.3353 > 192.168.43.38.3360: Flags [.], ack 1, win 9205, length 0
-   15:18:39.500066 IP 192.168.43.38.3360 > 192.168.43.131.3353: Flags [.], ack 1, win 29200, length 0
-   15:18:44.545006 IP 192.168.43.131.3353 > 192.168.43.38.3360: Flags [.], ack 1, win 9205, length 0
-   15:18:44.545082 IP 192.168.43.38.3360 > 192.168.43.131.3353: Flags [.], ack 1, win 29200, length 0
-   15:18:49.586017 IP 192.168.43.131.3353 > 192.168.43.38.3360: Flags [.], ack 1, win 9205, length 0
-   15:18:49.586078 IP 192.168.43.38.3360 > 192.168.43.131.3353: Flags [.], ack 1, win 29200, length 0
-   15:18:54.630125 IP 192.168.43.131.3353 > 192.168.43.38.3360: Flags [.], ack 1, win 9205, length 0
-   15:18:54.630191 IP 192.168.43.38.3360 > 192.168.43.131.3353: Flags [.], ack 1, win 29200, length 0
-   15:18:59.673084 IP 192.168.43.131.3353 > 192.168.43.38.3360: Flags [.], ack 1, win 9205, length 0
-   15:18:59.673150 IP 192.168.43.38.3360 > 192.168.43.131.3353: Flags [.], ack 1, win 29200, length 0
-   15:19:04.715285 IP 192.168.43.131.3353 > 192.168.43.38.3360: Flags [.], ack 1, win 9205, length 0
+   $ arp-ping 192.168.43.218
+     Reply that E8:E8:B7:A0:29:1C is 192.168.43.218 in 0.434ms
+     Reply that E8:E8:B7:A0:29:1C is 192.168.43.218 in 0.103ms
+     Reply that E8:E8:B7:A0:29:1C is 192.168.43.218 in 0.109ms
+     Reply that E8:E8:B7:A0:29:1C is 192.168.43.218 in 0.124ms
    ```
-   **Note:** TCP keepalive packets can be identified by the packet length and TCP flags. The capture logs show that the length of the packet is zero; in addition, the TCP flag `[.]` indicates that it is an ACK packet. This verifies that the TCP keepalive packets are sent and the corresponding ACKs are received from the target kit. This verifies the TCP keepalive offload functionality.
+   To send the `arp-ping` command every 'x' seconds, use the following command:
+   ```
+   $ arp-ping -i X <IP Address>
+   ```
+   where `i` denotes the interval; ARP request packets will be sent every `X` seconds.
 
-   **Windows:**
+10. Verify the functioning of packet filters by sending a ping request from your PC. 
 
-   1. Open the command prompt with administrator privileges and go to the location where TCPDUMP is installed.
-
-   2. Find the Wi-Fi interface number on which over-the-air packets will be captured using the following command. The Wi-Fi interface number is the sequence number that is at the beginning of each line.
+      Observe that these ping requests time out and do not get any response from the WLAN device because the packet filter configuration did not include the ping packet type (ICMP of type 0x1). The WLAN device simply discards any ping request packets coming from network peers without interrupting the host MCU in deep sleep. This helps the host MCU not have to act on the unwanted network packets.
 
       ```
-      C:\>tcpdump -D
-      1.\Device\{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} (Microsoft Wi-Fi Direct Virtual Adapter)
-      2.\Device\{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} (Microsoft Wi-Fi Direct Virtual Adapter)
-      3.\Device\{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} (WAN Miniport (Network Monitor))
-      4.\Device\{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} (PANGP Virtual Ethernet Adapter)
-      5.\Device\{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} (Intel(R) Dual Band Wireless-AC 8260)
-      6.\Device\{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} (Intel(R) Ethernet Connection I219-LM)
+      $ ping 192.168.43.218
+
+      Pinging 192.168.43.218 with 32 bytes of data:
+      Request timed out.
+      Request timed out.
+
+      Ping statistics for 192.168.43.218:
+         Packets: Sent = 2, Received = 0, Lost = 2 (100% loss),
       ```
 
-      Command syntax:
+      These steps indicate that the host MCU stays in deep sleep power mode while the WLAN device responds to ARP requests from network peers, filters unwanted network packets, and sends and receives TCP keepalive packets. In a real application use case, the host may choose to perform other useful tasks that the application requires instead of just entering deep sleep. This will improve the application performance because the host MCU has offloaded some of its network activities to the WLAN device.
 
-      ```
-      C:\>tcpdump -i <Wi-Fi interface number> -n <expression>
-      ```
+      PSoC&trade; 6 MCU wakes up only when required by the WLAN device in the following conditions:
 
-      Command to filter TCP keepalive packets:
+      - WLAN receives any TCP data from the server. For example, a ping (ICMP request packet) from a peer device wakes the PSoC&trade; 6 MCU device.
 
-      ```
-      C:\>tcpdump -i 5 -n "tcp[tcpflags] == tcp-syn or tcp[tcpflags] == tcp-ack" and port 3360
-      ```
-      The packet capture logs will look similar to those shown for Ubuntu OS.
+      - WLAN receives a link-down event (station disconnects from the AP)
 
-   **macOS:**
-
-   Find the Wi-Fi interface for packet capture and then use the tcpdump utility to capture the packets. The TCPDUMP utility is a built-in packet trace tool available in macOS. The following command lists all the interfaces and the interface number is identified on the `Device:` row (for example, *en0*) in the command output.
-
-   ```
-   $ networksetup -listallhardwareports
-
-   Hardware Port: Ethernet
-   Device: en0
-   Ethernet Address: xx:xx:xx:xx:xx:xx
-
-   Hardware Port: Wi-Fi
-   Device: en1
-   Ethernet Address: xx:xx:xx:xx:xx:xx
-   ```
-
-   Command syntax:
-
-   ```
-   $ sudo tcpdump -i <Wi-Fi interface number> -n <expression>
-   ```
-
-   Command to filter TCP keepalive packets:
-
-   ```
-   $ sudo tcpdump -i en1 -n "tcp[tcpflags] == tcp-syn or tcp[tcpflags] == tcp-ack" and port 3360
-   ```
-   The packet capture logs will look similar to those shown for Ubuntu OS.
-
-You can also use the Wireshark sniffer tool for capturing TCP keepalive packets on Windows, Ubuntu, and macOS.
-
-**Figure 1. TCP keepalive capture on Wireshark**
-
-![](images/wireshark_tko.png)
-
-PSoC&trade; 6 MCU will wake up only when required by the WLAN device in the following conditions:
-
-- WLAN receives any TCP data from the server. For example, a ping (ICMP request packet) from a peer device wakes the PSoC&trade; 6 MCU device.
-
-- WLAN receives a link-down event (station disconnects from the AP)
-
-It recommends testing this application in a less congested network to avoid possible host wakeups by the network peers.
+      Test this application in a less congested network to avoid possible host wakeups by the network peers.
 
 ##  Debugging
 
 You can debug the example to step through the code. In the IDE, use the **\<Application Name> Debug (KitProg3_MiniProg4)** configuration in the **Quick Panel**. For details, see the "Program and debug" section in the [Eclipse IDE for ModusToolbox&trade; software user guide](https://www.infineon.com/MTBEclipseIDEUserGuide).
 
-**Note:** **(Only while debugging)** On the CM4 CPU, some code in `main()` may execute before the debugger halts at the beginning of `main()`. This means that some code executes twice - once before the debugger stops execution, and again after the debugger resets the program counter to the beginning of `main()`. See [KBA231071](https://community.infineon.com/docs/DOC-21143) to learn about this and for the workaround.
+**Note:** **(Only while debugging)** On the CM4 CPU, some code in `main()` may execute before the debugger halts at the beginning of `main()`. This means that some code executes twice – once before the debugger stops execution, and again after the debugger resets the program counter to the beginning of `main()`. See [KBA231071](https://community.infineon.com/docs/DOC-21143) to learn about this and for the workaround.
 
 
 ##  Design and implementation
@@ -337,33 +293,33 @@ You can debug the example to step through the code. In the IDE, use the **\<Appl
 
 [Low power assistant](https://github.com/Infineon/lpa) (LPA) provides an easy way to develop low-power applications for [supported devices](#supported-kits). LPA supports the following features:
 
-- MCU low power
+- MCU low-power
 
-- Wi-Fi and Bluetooth&reg; low power
+- Wi-Fi and Bluetooth&reg; low-power
 
-- Wi-Fi address resolution protocol (ARP) offload
+- Wi-Fi ARP offload
 
 - Wi-Fi packet filter offload
 
-- Wi-Fi TCP keepalive offload
+- Wi-Fi WLAN offloads
 
-This document focuses on Wi-Fi TCP keepalive offload. This feature offloads the TCP keepalive functionality to the WLAN device, allowing the host MCU to enter sleep and deep sleep states, thus reducing the overall system power consumption.
+This readme focuses on Wi-Fi WLAN offloads. This feature offloads the TCP keepalive, ARP, and packet filter functionality to the WLAN device, allowing the host MCU to enter sleep and deep sleep states. Therefore, reducing the overall system power consumption.
 
-The WLAN firmware takes care of sending and receiving TCP keepalive packets with the TCP server (a different machine or a PC running a TCP server that listens for an incoming TCP connection).
+The WLAN firmware sends and receives TCP keepalive packets with the TCP server (a different machine or a PC running a TCP server that listens for an incoming TCP connection).
 
 ###  TCP keepalive
 
-A TCP keepalive packet is a message sent by one device to another to check whether the link between the two is operational or to prevent the link from being disconnected. When two devices are connected over a network via TCP/IP, TCP keepalive packets can be used to determine whether the connection is still valid, and terminate if needed.
+A TCP keepalive packet is a message sent by one device to another to check whether the link between the two is operational or to prevent the link from being disconnected. When two devices connect over a network via TCP/IP, TCP keepalive packets can be used to determine whether the connection is still valid and terminate if needed.
 
-If a connection has been terminated because of a TCP keepalive timeout, and the other device eventually sends a packet for the old connection, the device that terminated the connection will send a packet with the RST flag set to signal the other device that the old connection is no longer active. This will force the other device to terminate its end of the connection, therefore, a new connection can be established.
+If a connection has been terminated because of a TCP keepalive timeout and the other device eventually sends a packet for the old connection, the device that terminated the connection sends a packet with the RST flag set to signal the other device that the old connection is no longer active. This forces the other device to terminate its end of the connection, therefore, a new connection can be established.
 
 Therefore, TCP keepalive packets can be used in checking for dead peers or for preventing disconnection because of network inactivity.
 
 ###  TCP keepalive offload
 
-Typically, TCP keepalive packets are sent every 45 or 60 seconds on an idle TCP connection; the connection is dropped after three sequential ACKs are missed. This means that the host MCU must wake up periodically to send TCP keepalive packets to maintain the TCP connection during the idle state.
+Typically, TCP keepalive packets are sent every 45 or 60 seconds on an idle TCP connection; the connection drops after three sequential ACKs miss. This means that the host MCU must wake up periodically to send TCP keepalive packets to maintain the TCP connection during the idle state.
 
-The TCP keepalive offloads part of the LPA helps you improve the power consumption of your connected system by reducing the time the host needs to stay awake to support TCP keepalive requests. This is achieved by offloading the TCP keepalive functionality to the WLAN device so that the host MCU can be dedicated to your application.
+The TCP keepalive offloads part of the LPA help you improve the power consumption of your connected system by reducing the time the host needs to stay awake to support TCP keepalive requests. This is achieved by offloading the TCP keepalive functionality to the WLAN device so that the host MCU can be dedicated to your application.
 
 This section describes how to enable TCP keepalive offload and configure four different sockets for TCP connections.
 
@@ -374,19 +330,48 @@ This section describes how to enable TCP keepalive offload and configure four di
 ![](images/tko_enabled_vs_disabled.png)
 
 
-**Note:** The TCP keepalive activity is offloaded only when the host MCU goes to sleep and the network stack is suspended.
+### ARP offload
+
+ARP is a protocol that employs broadcast frames to perform IP address-to-MAC address lookup from an IP address like `192.168.1.1` to a physical machine address (MAC) like `ac:32:df:14:16:07`. ARP offload reduces the power consumption of your connected systems by reducing the time the host needs to stay awake due to ARP broadcast traffic. 
+
+ARP broadcast traffic is normally always forwarded from the network to the WLAN device to the host network stack. If the host is sleeping, an ARP packet is a wakeup trigger. Having the WLAN device handle some of the ARP traffic will reduce the frequency of host wakeup triggers and reduce the host power consumption.
+
+This application demonstrates the *Peer Auto Reply* functionality from the ARP offload feature. The WLAN device firmware is configured to respond to ARP requests from the network peers. If the WLAN device IP address table contains the host IP address, the WLAN device will fabricate an ARP reply to an ARP request from the network ('don't bother the host'), allowing the host to stay in deep sleep. This is a power-saving feature, as the host can stay in deep sleep longer. Based on the application use case, the MCU can be put into deep sleep during the RTOS idle time or can choose to do other important jobs.
+
+**Figure 3. ARP offload enabled vs disabled**
+
+![](images/arp_offload.png)
+
+### Packet filter offload
+
+The packet filter helps to filter out unwanted network packets from reaching the host MCU and waking it up from deep sleep. This helps the host to stay in deep sleep longer. The WLAN network packets can be filtered based on the port (at the application layer in the OSI model), IP protocol type (transport layer), or Ether Type (network layer).
+
+The Internet Assigned Numbers Authority (IANA) maintains the official assignments of port numbers, protocol numbers, or Ether type for WLAN packets. See the [IANA Protocols Registry](https://www.iana.org/protocols) for information on the protocol numbers.
+
+**Figure 4. Packet filters on standard IP stack**
+
+![](images/pkt_filter_osi_layers.png)
+
+**Figure 5. Packet filter enabled vs disabled**
+
+![](images/packet_filter.png)
+
+
+**Note:** The WLAN activities are offloaded only when the host MCU goes to sleep and the network stack is suspended.
 
 The application does the following when the kit is powered up:
 
 1. Initializes the WLAN device as an STA (Station) interface.
 
-2. Initializes the offload manager (OLM) with the configuration present in the *GeneratedSources/cycfg_connectivity_wifi.c/.h* files inside bsps/TARGET_\<kit>*, where the source code for the feature is generated by the device configurator tool in the IDE. The offload manager will be initialized based on the *GeneratedSources* configuration.
+2. Initializes the offload manager (OLM) with the configuration present in the *GeneratedSources/cycfg_connectivity_wifi.c/.h* files inside bsps/TARGET_\<kit>*, where the source code for the feature is generated by the device configurator tool in the IDE. The offload manager initializes based on the *GeneratedSources* configuration.
 
-3. Connects the kit to the AP with the Wi-Fi credentials set in the `WIFI_SSID` and `WIFI_PASSWORD` macros in the *app_config.h* file. The AP could be a mobile hotspot or a third-party AP.
+3. Connects the kit to the AP with the Wi-Fi credentials set in the `WIFI_SSID` and `WIFI_PASSWORD` macros in the *app_config.h* file. The AP can be a mobile hotspot or a third-party AP.
 
 4. Establishes a TCP socket connection with the configured TCP server. Note that the TCP server details are configured with the device configurator.
 
-###  Configure TCP keepalive using device configurator
+
+
+###  Configure WLAN offloads using the device configurator
 
 Use the device configurator tool to configure TCP keepalive and the host MCU WAKE pin.
 
@@ -420,11 +405,11 @@ Do the following to configure TCP keepalive in the *design.modus* file using the
 
       ![](images/configurator_pins_tab_43012.png)
 
-<br />
+<br>
 
    **CY8CPROTO-062-4343W:**
 
-   1. Enable the host WAKE pin **P0[4]**, and name it as *CYBSP_WIFI_HOST_WAKE*.
+   1. Enable the host WAKE pin **P0[4]** and name it *CYBSP_WIFI_HOST_WAKE*.
 
    2. In the **Parameters** pane, change the following:
 
@@ -440,17 +425,17 @@ Do the following to configure TCP keepalive in the *design.modus* file using the
 
    **Note:** The Wi-Fi host driver takes care of the drive mode configuration of the host WAKE pin.
 
-3. Go to the tab for the connectivity device and configure the fields as follows. This configuration applies to all [supported kits](#supported-kits). **Figure 5** shows the TCP keepalive offload configuration for CY8CKIT-062S2-43012.
+3. Go to the tab for the connectivity device and configure the fields as follows. This configuration applies to all [supported kits](#supported-kits). **Figure 6** shows the TCP keepalive offload configuration for CY8CKIT-062S2-43012.
 
      1. Click on the connectivity device at the top, expand the **Power** option from the list, and then click **Wi-Fi**.
 
-        **Figure 3. Navigate to the Wi-Fi device section**
+        **Figure 6. Navigate to the Wi-Fi device section**
 
         ![](images/tcpka_configuration.png)
 
      2. Enable Host Wake Configuration and set **Host Device Interrupt Pin** to **CYBSP_WIFI_HOST_WAKE**.
 
-        **Figure 4. Host WAKE pin**
+        **Figure 7. Host WAKE pin**
 
         ![](images/host_wake_pin.png)
 
@@ -466,28 +451,127 @@ Do the following to configure TCP keepalive in the *design.modus* file using the
 
         - **Destination IP Address**: IP address of the server (the PC running the TCP server). Get the IP address of the PC once it gets connected to the Wi-Fi network.
 
-        **Figure 5. Wi-Fi configuration**
+        **Figure 8. Wi-Fi configuration**
 
         ![](images/configurator_wifi_tab.png)
+
+4. ARP offload:
+   - Enable ARP offload.
+
+      ARP offload in Peer Auto Reply mode and IP Snooping enabled. In this mode, the WLAN device watches for ARP responses from the host to the network and caches them in the WLAN device host IP table. When an ARP request comes from the network peers, the WLAN device constructs the ARP response packet and sends it to the requesting device without interrupting the host.
+
+      **Figure 9. ARP offload configuration**
+
+      ![](images/arp_configuration.png)
+
+5. Packet filter offload:
+   - Enable Packet Filter Offload.
+
+      The following packet filters are enabled. This means that only these WLAN packet types will be allowed to reach the network stack of the host MCU. These are the minimum required packet types which should be allowed so that the host can establish and maintain a Wi-Fi connection with the AP.
+
+      ARP (0x806)       
+      802.1X (0x888E)   
+      DHCP (68)   
+      DNS (53)   
+
+      Additionally, it allows the following packet types as the application establishes a TCP socket connection with a remote TCP server. The TCP socket connection will fail if the following packets are not allowed. Modify the port numbers to match your TCP client and server network configuration accordingly.
+
+      TCP client port number (3353) as both Source and Destination ports
+      TCP server port number (3360) as both Source and Destination ports
+
+      **Figure 10. Packet Filter configuration**
+
+        ![](images/pf_configuration.png)
+        
+      **Figure 11. Packet Filter configuration**
+
+        ![](images/pf_configuration1.png)
+        
 
 4. Select **File** > **Save**.
 
    The generated source files *cycfg_connectivity_wifi.c* and *cycfg_connectivity_wifi.h* will be in the *GeneratedSource* folder, which is present in the same location from where you opened the *design.modus* file.
 
+<br>
+
+## Typical current measurement values
+
+This section provides the typical current measurement values for the CY8CKIT-062S2-43012 kit when PSoC&trade; 6 MCU is operated with Arm® Cortex®-M4 running at 100 MHz and at 1.1 V with full RAM retention.
+
+**Figure 12. Test network setup**
+
+![](images/test_network_setup.png)
+
+To realize the capability of WLAN offloads and their impact on the host MCU in terms of power savings, the current measurement has been done by considering the following cases. 
+
+To simulate a congested network environment, another Wi-Fi client device has been associated to the same network to which the target kit has associated. In all these current measurement cases, the role of the client device is to send ping and ARP request packets periodically in its configured interval to the IP address of the target kit. Based on whether the LPA offloads are enabled, the host MCU stays in deep sleep power mode or wake up because of the ping and arp-ping requests from the client device.
+
+WLAN offloads can be enabled or disabled in the Wi-Fi parameters using the Device configurator. 
+
+It is important to have the same test network setup (only the target kit and the test client machine are connected to the AP) as shown in **Figure 12** to reduce the network traffic such as broadcast and multicast packets from associated clients which could wake the Host MCU from deep sleep during the test.
+
+**Note:** PSoC&trade; 6 MCU and Wi-Fi device current numbers are measured and averaged over 20 seconds in all the following cases. Current measurements are taken when the associated Wi-Fi client sends a ping request every 5 seconds and an arp-ping request every 10 seconds to the IP address of the target kit.
+
+**AP configuration:**
+- DTIM: 3
+- Beacon interval: 100 ms
+- Band: 5 GHz
+
+**Case 1:**
+All WLAN offloads enabled (by default). 
+
+- PSoC&trade; 6 MCU stays in deep sleep.
+- The WLAN device responds to ARP request packets.
+- The WLAN device discards ping request packets.
+
+ PSoC&trade; 6 MCU current | CYW43012 Wi-Fi current | PSoC&trade; 6 MCU + CYW43012 Wi-Fi current
+ :----------------- | :------------------ | :------------------------------- 
+ 27 uA               | 270 uA                | 297 uA                          
+
+<br>
+
+**Case 2**:
+ARP offload is disabled (disabled using the device configurator).
+
+- PSoC&trade; 6 MCU wakes up to respond to ARP request packets.
+- The WLAN device discards ping request packets.
+
+ PSoC&trade; 6 MCU current | CYW43012 Wi-Fi current | PSoC&trade; 6 MCU + CYW43012 Wi-Fi current
+ :----------------- | :------------------ | :-------------------------------
+ 66 uA               | 634 uA                | 700 uA 
+
 <br />
+
+**Case 3**:
+ARP and packet filter offloads are disabled (disabled using the device configurator).
+
+- PSoC&trade; 6 MCU wakes up to respond to ARP requests and ping request packets.
+
+ PSoC&trade; 6 MCU current | CYW43012 Wi-Fi current | PSoC&trade; 6 MCU + CYW43012 Wi-Fi current
+ :----------------- | :------------------ | :-------------------------------
+ 117 uA               | 1.229 mA                | 1.346 mA                           
+
+<br>
+
+By disabling the WLAN offloads individually, the current consumption of the MCU and WLAN device increases.
+
+With WLAN offloads disabled, the total current consumption (PSoC&trade; 6 MCU + CYW43012) is approximately 1.346 mA, averaged over 20 seconds.
+
+With WLAN offloads enabled, the total current consumption (PSoC&trade; 6 MCU + CYW43012) is approximately 297 uA, averaged over 20 seconds.
+
+This shows that the total current consumption can be reduced by approximately 78% by enabling WLAN offloads.
 
 ## Related resources
 
 
 Resources  | Links
 -----------|----------------------------------
-Application notes  | [AN228571](https://www.infineon.com/AN228571) – Getting started with PSoC&trade; 6 MCU on ModusToolbox&trade; software <br />  [AN215656](https://www.infineon.com/AN215656) – PSoC&trade; 6 MCU: Dual-CPU system design <br /> [AN79953](https://www.infineon.com/AN79953) – Getting started with PSoC&trade; 4 <br />  [AN85951](https://www.infineon.com/AN85951) – PSoC&trade; 4 and PSoC&trade; 6 MCU CAPSENSE&trade; design guide
-Code examples  | [Using ModusToolbox&trade; software](https://github.com/Infineon/Code-Examples-for-ModusToolbox-Software) on GitHub <br /> [Using PSoC&trade; Creator](https://www.infineon.com/cms/en/design-support/software/code-examples/psoc-3-4-5-code-examples-for-psoc-creator)
-Device documentation | [PSoC&trade; 6 MCU datasheets](https://documentation.infineon.com/html/psoc6/bnm1651211483724.html) <br /> [PSoC&trade; 6 technical reference manuals](https://documentation.infineon.com/html/psoc6/zrs1651212645947.html)<br /> [PSoC&trade; 4 datasheets](https://www.infineon.com/cms/en/search.html?intc=searchkwr-return#!view=downloads&term=psoc%204&doc_group=Data%20Sheet) <br />[PSoC&trade; 4 technical reference manuals](https://www.infineon.com/cms/en/search.html#!term=psoc%204%20technical%20reference%20manual&view=all)
+Application notes  | [AN228571](https://www.infineon.com/AN228571) – Getting started with PSoC&trade; 6 MCU on ModusToolbox&trade; software <br />  [AN215656](https://www.infineon.com/AN215656) – PSoC&trade; 6 MCU: Dual-CPU system design
+Code examples  | [Using ModusToolbox&trade; software](https://github.com/Infineon/Code-Examples-for-ModusToolbox-Software) on GitHub
+Device documentation | [PSoC&trade; 6 MCU datasheets](https://documentation.infineon.com/html/psoc6/bnm1651211483724.html) <br /> [PSoC&trade; 6 technical reference manuals](https://documentation.infineon.com/html/psoc6/zrs1651212645947.html)
 Development kits | Select your kits from the [evaluation board finder](https://www.infineon.com/cms/en/design-support/finder-selection-tools/product-finder/evaluation-board)
-Libraries on GitHub  | [mtb-pdl-cat1](https://github.com/Infineon/mtb-pdl-cat1) – PSoC&trade; 6 peripheral driver library (PDL)  <br /> [mtb-hal-cat1](https://github.com/Infineon/mtb-hal-cat1) – Hardware abstraction layer (HAL) library <br /> [retarget-io](https://github.com/Infineon/retarget-io) – Utility library to retarget STDIO messages to a UART port <br />  [mtb-pdl-cat2](https://github.com/Infineon/mtb-pdl-cat2) – PSoC&trade; 4 peripheral driver library (PDL) <br />  [mtb-hal-cat2](https://github.com/Infineon/mtb-hal-cat2) – Hardware abstraction layer (HAL) library
-Middleware on GitHub  | [capsense](https://github.com/Infineon/capsense) – CAPSENSE&trade; library and documents <br /> [psoc6-middleware](https://github.com/Infineon/modustoolbox-software#psoc-6-middleware-libraries) – Links to all PSoC&trade; 6 MCU middleware
-Tools  | [Eclipse IDE for ModusToolbox&trade; software](https://www.infineon.com/modustoolbox) – ModusToolbox&trade; software is a collection of easy-to-use software and tools enabling rapid development with Infineon MCUs, covering applications from embedded sense and control to wireless and cloud-connected systems using AIROC&trade; Wi-Fi and Bluetooth&reg; connectivity devices. <br /> [PSoC&trade; Creator](https://www.infineon.com/cms/en/design-support/tools/sdk/psoc-software/psoc-creator/) – IDE for PSoC&trade; and FM0+ MCU development
+Libraries on GitHub  | [mtb-pdl-cat1](https://github.com/Infineon/mtb-pdl-cat1) – PSoC&trade; 6 peripheral driver library (PDL)  <br /> [mtb-hal-cat1](https://github.com/Infineon/mtb-hal-cat1) – Hardware abstraction layer (HAL) library <br /> [retarget-io](https://github.com/Infineon/retarget-io) – Utility library to retarget STDIO messages to a UART port <br />  [mtb-pdl-cat2](https://github.com/Infineon/mtb-pdl-cat2) – PSoC&trade; 4 Peripheral Driver Library (PDL) 
+Tools  | [Eclipse IDE for ModusToolbox&trade; software](https://www.infineon.com/modustoolbox) – ModusToolbox&trade; software is a collection of easy-to-use software and tools enabling rapid development with Infineon MCUs, covering applications from embedded sense and control to wireless and cloud-connected systems using AIROC&trade; Wi-Fi and Bluetooth&reg; connectivity devices.
 
 <br />
 
@@ -501,21 +585,21 @@ For PSoC&trade; 6 MCU devices, see [How to design with PSoC&trade; 6 MCU - KBA22
 
 ## Document history
 
-Document title: *CE229926* - *WLAN TCP keepalive offload*
+Document title: *CE229926* - *WLAN offloads*
 
  Version | Description of change
  ------- | ---------------------
  1.0.0   | New code example
  1.1.0   | Fixed IAR compiler warning and minor changes to the Makefile
  2.0.0   | Major update to support ModusToolbox&trade; software v2.2 and LPA v3.0.0.<br/>This version is not backward compatible with ModusToolbox&trade; software v2.1
- 2.1.0   | Added support for Rapid IoT Connect developer kit (CYSBSYSKIT-DEV-01)
+ 2.1.0   | Added support for Rapid IoT Connect Developer Kit (CYSBSYSKIT-DEV-01)
  2.2.0   | Updated to FreeRTOS v10.3.1
- 2.3.0   | Updated to FreeRTOS v10.4.3 <br /> Added support for new kits
- 3.0.0   | Updated to support ModusToolbox&trade; software v2.4 <br /> Added support for new kits <br /> Updated the BSPs to v3.X
+ 2.3.0   | Updated to FreeRTOS v10.4.3 <br> Added support for new kits
+ 3.0.0   | Updated to support ModusToolbox&trade; software v2.4 <br> Added support for new kits <br> Updated the BSPs to v3.X
  4.0.0   | Major update to support ModusToolbox&trade; v3.0. This version is not backward compatible with previous versions of ModusToolbox&trade; software.
  4.1.0   | Added the BSP support for CY8CEVAL-062S2-LAI-43439M2
- 4.2.0   | Added support for CY8CPROTO-062S2-43439. 
-
+ 4.2.0   | Added support for CY8CPROTO-062S2-43439.
+ 5.0.0   | Added ARP and packer filter offload functionalities.
 <br />
 
 ---------------------------------------------------------

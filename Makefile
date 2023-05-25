@@ -46,7 +46,7 @@ TARGET=CY8CPROTO-062-4343W
 #
 # If APPNAME is edited, ensure to update or regenerate launch
 # configurations for your IDE.
-APPNAME=mtb-example-wifi-offload-tcp-keepalive
+APPNAME=mtb-example-wlan-offloads
 
 # Name of toolchain to use. Options include:
 #

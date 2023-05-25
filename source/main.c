@@ -126,7 +126,7 @@ int main(void)
     /* \x1b[2J\x1b[;H - ANSI ESC sequence to clear screen */
     APP_INFO(("\x1b[2J\x1b[;H"));
     APP_INFO(("=====================================\n"));
-    APP_INFO(("CE229926 - WLAN TCP Keepalive Offload\n"));
+    APP_INFO(("CE229926 - WLAN Offloads\n"));
     APP_INFO(("=====================================\n\n"));
 
     /* Start the FreeRTOS scheduler */
