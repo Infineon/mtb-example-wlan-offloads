@@ -16,7 +16,7 @@
 *   CY8CPROTO-062-4343W PSoC 6 Wi-Fi BT Prototyping Kit
 *
 ********************************************************************************
-* Copyright 2020-2023, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2020-2024, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
