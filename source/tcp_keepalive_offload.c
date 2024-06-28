@@ -163,7 +163,7 @@ void network_idle_task(void *arg)
          * and resumed by the offload manager.
          */
         vTaskDelay(pdMS_TO_TICKS(NETWORK_SUSPEND_DELAY_MS));
-        
+
         print_heap_usage("In the sleep wake-up loop");
     }
 }
@@ -330,4 +330,3 @@ cy_rslt_t wifi_connect(void)
 
 
 /* [] END OF FILE */
-

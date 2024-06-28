@@ -829,7 +829,7 @@
                         <Param id="tcpkaRetryCount" value="3"/>
                         <Param id="tcpkaSrcPort0" value="3353"/>
                         <Param id="tcpkaDstPort0" value="3360"/>
-                        <Param id="tcpkaDstIpAddr0" value="192.168.0.2"/>
+                        <Param id="tcpkaDstIpAddr0" value="192.168.0.10"/>
                         <Param id="tcpkaSrcPort1" value="0"/>
                         <Param id="tcpkaDstPort1" value="0"/>
                         <Param id="tcpkaDstIpAddr1" value="0.0.0.0"/>

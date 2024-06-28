@@ -62,15 +62,15 @@
 #define WIFI_SECURITY_TYPE                CY_WCM_SECURITY_WPA2_AES_PSK
 
 /* This macro specifies the interval in milliseconds that the device monitors
-   the network for inactivity. If the network is inactive for duration lesser 
-   than INACTIVE_WINDOW_MS in this interval, the MCU does not suspend the network 
-   stack and informs the calling function that the MCU wait period timed out 
+   the network for inactivity. If the network is inactive for duration lesser
+   than INACTIVE_WINDOW_MS in this interval, the MCU does not suspend the network
+   stack and informs the calling function that the MCU wait period timed out
    while waiting for network to become inactive.
 */
 #define NETWORK_INACTIVE_INTERVAL_MS      (300)
 
-/* This macro specifies the continuous duration in milliseconds for which the 
-   network has to be inactive. If the network is inactive for this duaration,
+/* This macro specifies the continuous duration in milliseconds for which the
+   network has to be inactive. If the network is inactive for this duration,
    the MCU will suspend the network stack. Now, the MCU will not need to service
    the network timers which allows it to stay longer in sleep/deepsleep.
 */
@@ -93,4 +93,3 @@
 
 
 /* [] END OF FILE */
-

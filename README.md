@@ -6,13 +6,14 @@ The WLAN offload functionalities allow the WLAN device to handle incoming TCP ke
 
 [View this README on GitHub.](https://github.com/Infineon/mtb-example-wlan-offloads)
 
-[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyMjk5MjYiLCJTcGVjIE51bWJlciI6IjAwMi0yOTkyNiIsIkRvYyBUaXRsZSI6IldMQU4gb2ZmbG9hZHMiLCJyaWQiOiJzZGFrIiwiRG9jIHZlcnNpb24iOiI1LjMuMCIsIkRvYyBMYW5ndWFnZSI6IkVuZ2xpc2giLCJEb2MgRGl2aXNpb24iOiJNQ0QiLCJEb2MgQlUiOiJJQ1ciLCJEb2MgRmFtaWx5IjoiUFNPQyJ9)
+[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyMjk5MjYiLCJTcGVjIE51bWJlciI6IjAwMi0yOTkyNiIsIkRvYyBUaXRsZSI6IldMQU4gb2ZmbG9hZHMiLCJyaWQiOiJzZGFrIiwiRG9jIHZlcnNpb24iOiI1LjQuMCIsIkRvYyBMYW5ndWFnZSI6IkVuZ2xpc2giLCJEb2MgRGl2aXNpb24iOiJNQ0QiLCJEb2MgQlUiOiJJQ1ciLCJEb2MgRmFtaWx5IjoiUFNPQyJ9)
 
 ## Requirements
 
 - [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.1 or later (tested with v3.1)
 - Board support package (BSP) minimum required version: 4.0.0
 - Programming language: C
+- Other tools: Python v3.8.10 or later
 - Associated parts: All [PSoC&trade; 6 MCU](https://www.infineon.com/PSoC6) parts with SDIO, [PSoC&trade; 6 MCU with AIROC&trade; CYW43012 Wi-Fi & Bluetooth&reg; combo chip](https://www.infineon.com/cms/en/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/wi-fi-4-802.11n/cyw43012/), [PSoC&trade; 6 MCU with AIROC&trade; CYW4343W Wi-Fi & Bluetooth&reg; combo chip](https://www.infineon.com/cms/en/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/wi-fi-4-802.11n/cyw4343w/)
 
 
@@ -35,14 +36,13 @@ The WLAN offload functionalities allow the WLAN device to handle incoming TCP ke
 - [PSoC&trade; 62S3 Wi-Fi Bluetooth&reg; Prototyping Kit](https://www.infineon.com/CY8CPROTO-062S3-4343W) (`CY8CPROTO-062S3-4343W`)
 - [PSoC&trade; 62S2 Evaluation Kit](https://www.infineon.com/CY8CEVAL-062S2) (`CY8CEVAL-062S2-LAI-4373M2`, `CY8CEVAL-062S2-MUR-43439M2`, `CY8CEVAL-062S2-LAI-43439M2`, `CY8CEVAL-062S2-MUR-4373EM2`, `CY8CEVAL-062S2-MUR-4373M2`)
 - Rapid IoT Connect Developer Kit (`CYSBSYSKIT-DEV-01`)
-- [XMC7200 Evaluation Kit](https://www.infineon.com/KIT_XMC72_EVK) (`KIT_XMC72_EVK_MUR_43439M2`)
 - [PSoC&trade; 6 AI Evaluation Kit](https://www.infineon.com/CY8CKIT-062S2-AI) (`CY8CKIT-062S2-AI`)
 
 ## Hardware setup
 
 This example uses the board's default configuration. See the kit user guide to ensure that the board is configured correctly.
 
-**Note:** The PSoC&trade; 6 Wi-Fi Bluetooth&reg; Pioneer Kit (CY8CKIT-062-WIFI-BT) ships with KitProg2 installed. The ModusToolbox&trade; requires KitProg3. Before using this code example, make sure that the board is upgraded to KitProg3. The tool and instructions are available in the [Firmware Loader](https://github.com/Infineon/Firmware-loader) GitHub repository. If you do not upgrade, you will see an error like "unable to find CMSIS-DAP device" or "KitProg firmware is out of date".
+> **Note:** The PSoC&trade; 6 Wi-Fi Bluetooth&reg; Pioneer Kit (CY8CKIT-062-WIFI-BT) ships with KitProg2 installed. The ModusToolbox&trade; requires KitProg3. Before using this code example, make sure that the board is upgraded to KitProg3. The tool and instructions are available in the [Firmware Loader](https://github.com/Infineon/Firmware-loader) GitHub repository. If you do not upgrade, you will see an error like "unable to find CMSIS-DAP device" or "KitProg firmware is out of date".
 
 
 ## Software setup
@@ -53,7 +53,7 @@ This example uses the board's default configuration. See the kit user guide to e
    - [Windows OS](https://www.elifulkerson.com/projects/arp-ping.php)
    - [macOS](https://macappstore.org/arping/)
    - On Linux, use the `sudo apt install arping` command. Most of the Ubuntu OS distributions have it natively available.
-4. Install a Python interpreter if you don't have one. This code example is tested using [Python 3.7.7](https://www.python.org/downloads/release/python-377/). 
+4. Install the Python interpreter and add it to the top of the system path in environmental variables. This code example is tested with [Python v3.8.10](https://www.python.org/downloads/release/python-3810/).
 
 ## Using the code example
 
@@ -183,14 +183,14 @@ If using a PSoC&trade; 64 "Secure" MCU kit (like CY8CKIT-064B0S2-4343W), the PSo
 
 5. Open a command shell and run the Python TCP echo server (*tcp_server.py*) from the project directory. The Python script starts a TCP server and the server starts listening for incoming TCP connections.
 
-   **Note:** The default port number is defined as `50007` in the *tcp_server.py* script. Specify a custom port number between 1 and 65535 that you would like to use.
+   > **Note:** The default port number is defined as `50007` in the *tcp_server.py* script. Specify a custom port number between 1 and 65535 that you would like to use.
 
    ```
    python tcp_server.py --port 3360
    ```
    where `3360` is the port number of the server (destination port number), which is already configured in the device configurator.
 
-   **Note:** Ensure that the firewall settings of your PC allow access to the Python software so that it can communicate with the TCP client. See this [community thread](https://community.infineon.com/thread/53662).
+   > **Note:** Ensure that the firewall settings of your PC allow access to the Python software so that it can communicate with the TCP client. See this [community thread](https://community.infineon.com/thread/53662).
 
 6. Program the board using one of the following:
 
@@ -235,9 +235,9 @@ If using a PSoC&trade; 64 "Secure" MCU kit (like CY8CKIT-064B0S2-4343W), the PSo
     Info: Wi-Fi initialization is successful
     Info: Join to AP: WIFI_SSID
     Info: Successfully joined wifi network WIFI_SSID
-    Info: Assigned IP address: 192.168.43.131
+    Info: Assigned IP address: 192.168.0.15
     Info: Taking Offload manager configurations from the Generated sources.
-    Info: Socket[0]: Created connection to IP 192.168.43.218, local port 3353, remote port 3360
+    Info: Socket[0]: Created connection to IP 192.168.0.10, local port 3353, remote port 3360
     Info: Skipped TCP socket connection for socket id[1]. Check the TCP Keepalive configuration.
     Info: Skipped TCP socket connection for socket id[2]. Check the TCP Keepalive configuration.
     Info: Skipped TCP socket connection for socket id[3]. Check the TCP Keepalive configuration.
@@ -256,11 +256,11 @@ If using a PSoC&trade; 64 "Secure" MCU kit (like CY8CKIT-064B0S2-4343W), the PSo
 9. Verify the functioning of ARP offload by sending an ARP request packet from your PC. Observe that the responses are received from the WLAN device without interrupting the host MCU from deep sleep.
 
    ```
-   $ arp-ping 192.168.43.218
-     Reply that E8:E8:B7:A0:29:1C is 192.168.43.218 in 0.434ms
-     Reply that E8:E8:B7:A0:29:1C is 192.168.43.218 in 0.103ms
-     Reply that E8:E8:B7:A0:29:1C is 192.168.43.218 in 0.109ms
-     Reply that E8:E8:B7:A0:29:1C is 192.168.43.218 in 0.124ms
+   $ arp-ping 192.168.0.15
+     Reply that E8:E8:B7:A0:29:1C is 192.168.0.15 in 0.434ms
+     Reply that E8:E8:B7:A0:29:1C is 192.168.0.15 in 0.103ms
+     Reply that E8:E8:B7:A0:29:1C is 192.168.0.15 in 0.109ms
+     Reply that E8:E8:B7:A0:29:1C is 192.168.0.15 in 0.124ms
    ```
    To send the `arp-ping` command every 'x' seconds, use the following command:
    ```
@@ -268,18 +268,18 @@ If using a PSoC&trade; 64 "Secure" MCU kit (like CY8CKIT-064B0S2-4343W), the PSo
    ```
    where `i` denotes the interval; ARP request packets will be sent every `X` seconds.
 
-10. Verify the functioning of packet filters by sending a ping request from your PC. 
+10. Verify the functioning of packet filters by sending a ping request from your PC.
 
       Observe that these ping requests time out and do not get any response from the WLAN device because the packet filter configuration did not include the ping packet type (ICMP of type 0x1). The WLAN device simply discards any ping request packets coming from network peers without interrupting the host MCU in deep sleep. This helps the host MCU not have to act on the unwanted network packets.
 
       ```
-      $ ping 192.168.43.218
+      $ ping 192.168.0.15
 
-      Pinging 192.168.43.218 with 32 bytes of data:
+      Pinging 192.168.0.15 with 32 bytes of data:
       Request timed out.
       Request timed out.
 
-      Ping statistics for 192.168.43.218:
+      Ping statistics for 192.168.0.15:
          Packets: Sent = 2, Received = 0, Lost = 2 (100% loss),
       ```
 
@@ -354,7 +354,7 @@ This section describes how to enable TCP keepalive offload and configure four di
 
 ### ARP offload
 
-ARP is a protocol that employs broadcast frames to perform IP address-to-MAC address lookup from an IP address like `192.168.1.1` to a physical machine address (MAC) like `ac:32:df:14:16:07`. ARP offload reduces the power consumption of your connected systems by reducing the time the host needs to stay awake due to ARP broadcast traffic. 
+ARP is a protocol that employs broadcast frames to perform IP address-to-MAC address lookup from an IP address like `192.168.1.1` to a physical machine address (MAC) like `ac:32:df:14:16:07`. ARP offload reduces the power consumption of your connected systems by reducing the time the host needs to stay awake due to ARP broadcast traffic.
 
 ARP broadcast traffic is normally always forwarded from the network to the WLAN device to the host network stack. If the host is sleeping, an ARP packet is a wakeup trigger. Having the WLAN device handle some of the ARP traffic will reduce the frequency of host wakeup triggers and reduce the host power consumption.
 
@@ -379,7 +379,7 @@ The Internet Assigned Numbers Authority (IANA) maintains the official assignment
 ![](images/packet_filter.png)
 
 
-**Note:** The WLAN activities are offloaded only when the host MCU goes to sleep and the network stack is suspended.
+> **Note:** The WLAN activities are offloaded only when the host MCU goes to sleep and the network stack is suspended.
 
 The application does the following when the kit is powered up:
 
@@ -401,13 +401,13 @@ A default *design.modus* file is packaged for each [supported kit](#supported-ki
 
 For this TCP keepalive offload application demonstration, a pre-configured *design.modus* file that overrides the default kit configuration is provided for each supported kit. These files are located in the project folder under templates/TARGET_\<kit>*.
 
-**Note:** This section provides instructions only for the targets CY8CPROTO-062-4343W and CY8CKIT-062S2-43012. For other targets, you can follow the same instructions to create a custom configuration. See the *bsp/TARGET_<BSP-NAME>/config/GeneratedSource/cycfg_pins.h* file for pin details such as CYBSP_WIFI_HOST_WAKE.
+> **Note:** This section provides instructions only for the targets CY8CPROTO-062-4343W and CY8CKIT-062S2-43012. For other targets, you can follow the same instructions to create a custom configuration. See the *bsp/TARGET_<BSP-NAME>/config/GeneratedSource/cycfg_pins.h* file for pin details such as CYBSP_WIFI_HOST_WAKE.
 
 The custom configuration has the necessary settings enabled for the feature to work except for the IP address of the server (your PC).
 
 Do the following to configure TCP keepalive in the *design.modus* file using the device configurator tool:
 
-**Note:** These steps are already handled in this application except for the IP address of the server (your PC). They are provided only for informational purposes.
+> **Note:** These steps are already handled in this application except for the IP address of the server (your PC). They are provided only for informational purposes.
 
 1. Open Device Configurator from the **Quick Panel** when using Eclipse IDE for ModusToolbox&trade;, or through the `make config` command from the root directory of the code example repository.
 
@@ -427,7 +427,7 @@ Do the following to configure TCP keepalive in the *design.modus* file using the
 
       ![](images/configurator_pins_tab_43012.png)
 
-<br>
+    <br>
 
    **CY8CPROTO-062-4343W:**
 
@@ -443,9 +443,9 @@ Do the following to configure TCP keepalive in the *design.modus* file using the
 
        ![](images/configurator_pins_tab.png)
 
-       
 
-   **Note:** The Wi-Fi host driver takes care of the drive mode configuration of the host WAKE pin.
+
+      > **Note:** The Wi-Fi host driver takes care of the drive mode configuration of the host WAKE pin.
 
 3. Go to the tab for the connectivity device and configure the fields as follows. This configuration applies to all [supported kits](#supported-kits). **Figure 6** shows the TCP keepalive offload configuration for CY8CKIT-062S2-43012.
 
@@ -491,10 +491,10 @@ Do the following to configure TCP keepalive in the *design.modus* file using the
 
       The following packet filters are enabled. This means that only these WLAN packet types will be allowed to reach the network stack of the host MCU. These are the minimum required packet types which should be allowed so that the host can establish and maintain a Wi-Fi connection with the AP.
 
-      ARP (0x806)       
-      802.1X (0x888E)   
-      DHCP (68)   
-      DNS (53)   
+      ARP (0x806)
+      802.1X (0x888E)
+      DHCP (68)
+      DNS (53)
 
       Additionally, it allows the following packet types as the application establishes a TCP socket connection with a remote TCP server. The TCP socket connection will fail if the following packets are not allowed. Modify the port numbers to match your TCP client and server network configuration accordingly.
 
@@ -504,11 +504,11 @@ Do the following to configure TCP keepalive in the *design.modus* file using the
       **Figure 10. Packet Filter configuration**
 
         ![](images/pf_configuration.png)
-        
+
       **Figure 11. Packet Filter configuration**
 
         ![](images/pf_configuration1.png)
-        
+
 
 4. Select **File** > **Save**.
 
@@ -524,15 +524,15 @@ This section provides the typical current measurement values for the CY8CKIT-062
 
 ![](images/test_network_setup.png)
 
-To realize the capability of WLAN offloads and their impact on the host MCU in terms of power savings, the current measurement has been done by considering the following cases. 
+To realize the capability of WLAN offloads and their impact on the host MCU in terms of power savings, the current measurement has been done by considering the following cases.
 
 To simulate a congested network environment, another Wi-Fi client device has been associated to the same network to which the target kit has associated. In all these current measurement cases, the role of the client device is to send ping and ARP request packets periodically in its configured interval to the IP address of the target kit. Based on whether the LPA offloads are enabled, the host MCU stays in deep sleep power mode or wake up because of the ping and arp-ping requests from the client device.
 
-WLAN offloads can be enabled or disabled in the Wi-Fi parameters using the Device configurator. 
+WLAN offloads can be enabled or disabled in the Wi-Fi parameters using the Device configurator.
 
 It is important to have the same test network setup (only the target kit and the test client machine are connected to the AP) as shown in **Figure 12** to reduce the network traffic such as broadcast and multicast packets from associated clients which could wake the Host MCU from deep sleep during the test.
 
-**Note:** PSoC&trade; 6 MCU and Wi-Fi device current numbers are measured and averaged over 20 seconds in all the following cases. Current measurements are taken when the associated Wi-Fi client sends a ping request every 5 seconds and an arp-ping request every 10 seconds to the IP address of the target kit.
+> **Note:** PSoC&trade; 6 MCU and Wi-Fi device current numbers are measured and averaged over 20 seconds in all the following cases. Current measurements are taken when the associated Wi-Fi client sends a ping request every 5 seconds and an arp-ping request every 10 seconds to the IP address of the target kit.
 
 **AP configuration:**
 - DTIM: 3
@@ -540,15 +540,15 @@ It is important to have the same test network setup (only the target kit and the
 - Band: 5 GHz
 
 **Case 1:**
-All WLAN offloads enabled (by default). 
+All WLAN offloads enabled (by default).
 
 - PSoC&trade; 6 MCU stays in deep sleep.
 - The WLAN device responds to ARP request packets.
 - The WLAN device discards ping request packets.
 
  PSoC&trade; 6 MCU current | CYW43012 Wi-Fi current | PSoC&trade; 6 MCU + CYW43012 Wi-Fi current
- :----------------- | :------------------ | :------------------------------- 
- 27 uA               | 270 uA                | 297 uA                          
+ :----------------- | :------------------ | :-------------------------------
+ 27 uA               | 270 uA                | 297 uA
 
 <br>
 
@@ -560,7 +560,7 @@ ARP offload is disabled (disabled using the device configurator).
 
  PSoC&trade; 6 MCU current | CYW43012 Wi-Fi current | PSoC&trade; 6 MCU + CYW43012 Wi-Fi current
  :----------------- | :------------------ | :-------------------------------
- 66 uA               | 634 uA                | 700 uA 
+ 66 uA               | 634 uA                | 700 uA
 
 <br>
 
@@ -571,7 +571,7 @@ ARP and packet filter offloads are disabled (disabled using the device configura
 
  PSoC&trade; 6 MCU current | CYW43012 Wi-Fi current | PSoC&trade; 6 MCU + CYW43012 Wi-Fi current
  :----------------- | :------------------ | :-------------------------------
- 117 uA               | 1.229 mA                | 1.346 mA                           
+ 117 uA               | 1.229 mA                | 1.346 mA
 
 <br>
 
@@ -592,7 +592,7 @@ Application notes  | [AN228571](https://www.infineon.com/AN228571) – Getting s
 Code examples  | [Using ModusToolbox&trade;](https://github.com/Infineon/Code-Examples-for-ModusToolbox-Software) on GitHub
 Device documentation | [PSoC&trade; 6 MCU datasheets](https://documentation.infineon.com/html/psoc6/bnm1651211483724.html) <br> [PSoC&trade; 6 technical reference manuals](https://documentation.infineon.com/html/psoc6/zrs1651212645947.html)
 Development kits | Select your kits from the [Evaluation board finder](https://www.infineon.com/cms/en/design-support/finder-selection-tools/product-finder/evaluation-board)
-Libraries on GitHub  | [mtb-pdl-cat1](https://github.com/Infineon/mtb-pdl-cat1) – PSoC&trade; 6 Peripheral Driver Library (PDL)  <br> [mtb-hal-cat1](https://github.com/Infineon/mtb-hal-cat1) – Hardware Abstraction Layer (HAL) library <br> [retarget-io](https://github.com/Infineon/retarget-io) – Utility library to retarget STDIO messages to a UART port <br>  [mtb-pdl-cat2](https://github.com/Infineon/mtb-pdl-cat2) – PSoC&trade; 4 Peripheral Driver Library (PDL) 
+Libraries on GitHub  | [mtb-pdl-cat1](https://github.com/Infineon/mtb-pdl-cat1) – PSoC&trade; 6 Peripheral Driver Library (PDL)  <br> [mtb-hal-cat1](https://github.com/Infineon/mtb-hal-cat1) – Hardware Abstraction Layer (HAL) library <br> [retarget-io](https://github.com/Infineon/retarget-io) – Utility library to retarget STDIO messages to a UART port <br>  [mtb-pdl-cat2](https://github.com/Infineon/mtb-pdl-cat2) – PSoC&trade; 4 Peripheral Driver Library (PDL)
 Tools  | [Eclipse IDE for ModusToolbox&trade;](https://www.infineon.com/modustoolbox) – ModusToolbox&trade; is a collection of easy-to-use software and tools enabling rapid development with Infineon MCUs, covering applications from embedded sense and control to wireless and cloud-connected systems using AIROC&trade; Wi-Fi and Bluetooth&reg; connectivity devices.
 
 <br>
@@ -622,9 +622,10 @@ Document title: *CE229926* - *WLAN offloads*
  4.1.0   | Added the BSP support for CY8CEVAL-062S2-LAI-43439M2
  4.2.0   | Added support for CY8CPROTO-062S2-43439.
  5.0.0   | Added ARP and packer filter offload functionalities.
- 5.1.0   | Added support for CY8CEVAL-062S2-MUR-4373EM2 and CY8CEVAL-062S2-MUR-4373M2  
- 5.2.0   | Added support for KIT_XMC72_EVK_MUR_43439M2 and updated to support ModusToolbox&trade; v3.1.
+ 5.1.0   | Added support for CY8CEVAL-062S2-MUR-4373EM2 and CY8CEVAL-062S2-MUR-4373M2
+ 5.2.0   | Added support for KIT_XMC72_EVK_MUR_43439M2 and updated to support ModusToolbox&trade; v3.1
  5.3.0   | Added support for CY8CKIT-062S2-AI
+ 5.4.0   | Removed support for KIT_XMC72_EVK_MUR_43439M2 due to required board changes
 <br>
 
 
